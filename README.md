@@ -308,3 +308,9 @@ How it was certified (`scripts/verify_a4.py`):
   branch-and-bound solver in C (64-bit integer arithmetic, brute-force-tested) and solved all
   6500 (x, y) instances of every gadget with no symmetry assumptions: it reproduces
   C, S1, S2 of all five gadgets and the ratio 441001222/444830061 exactly.
+
+## License
+
+The code and data in this repository are released under the MIT License (`LICENSE`). The paper in `paper/`
+(`main.tex`, `refs.bib`, `main.pdf`) is licensed under the Creative Commons Attribution 4.0 International
+License, CC BY 4.0 (`paper/LICENSE`).
