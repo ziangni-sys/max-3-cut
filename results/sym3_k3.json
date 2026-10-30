@@ -1,0 +1,155 @@
+{
+ "k": 3,
+ "source": "Hastad Max-E3-Lin(Z_3): x_a+x_b+x_c = t (mod 3), NP-hard (1-eps, 1/3+eps)",
+ "theorem": "negation merge (README, 'MAX-3-CUT below 16/17'): type t=0 -> E-gadget, types t=1,2 -> N-gadget; no global vertices used",
+ "format": "edges (u, v, weight), 1-indexed; vertices 1-3 primaries, 4-6 globals (unused), 7.. auxiliaries",
+ "gadgets": [
+  {
+   "name": "E",
+   "types": [
+    0
+   ],
+   "n_vertices": 12,
+   "edges": [
+    [
+     1,
+     7,
+     2
+    ],
+    [
+     1,
+     8,
+     2
+    ],
+    [
+     1,
+     9,
+     2
+    ],
+    [
+     1,
+     10,
+     2
+    ],
+    [
+     2,
+     9,
+     2
+    ],
+    [
+     2,
+     10,
+     2
+    ],
+    [
+     2,
+     11,
+     2
+    ],
+    [
+     2,
+     12,
+     2
+    ],
+    [
+     3,
+     7,
+     2
+    ],
+    [
+     3,
+     8,
+     2
+    ],
+    [
+     3,
+     11,
+     2
+    ],
+    [
+     3,
+     12,
+     2
+    ],
+    [
+     7,
+     12,
+     2
+    ],
+    [
+     7,
+     10,
+     2
+    ],
+    [
+     8,
+     9,
+     2
+    ],
+    [
+     8,
+     11,
+     2
+    ],
+    [
+     9,
+     12,
+     2
+    ],
+    [
+     10,
+     11,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "N",
+   "types": [
+    1,
+    2
+   ],
+   "n_vertices": 7,
+   "edges": [
+    [
+     1,
+     2,
+     1
+    ],
+    [
+     1,
+     3,
+     1
+    ],
+    [
+     2,
+     3,
+     1
+    ],
+    [
+     1,
+     7,
+     3
+    ],
+    [
+     2,
+     7,
+     3
+    ],
+    [
+     3,
+     7,
+     3
+    ]
+   ]
+  }
+ ],
+ "ratio_balanced": [
+  27,
+  29
+ ],
+ "ratio_unbalanced_worst": [
+  31,
+  33
+ ]
+}

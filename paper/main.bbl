@@ -1,0 +1,105 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{AOTW14}
+
+\bibitem[AM09]{AM09}
+Per Austrin and Elchanan Mossel.
+\newblock Approximation resistant predicates from pairwise independence.
+\newblock {\em Computational Complexity}, 18(2):249--271, 2009.
+
+\bibitem[AOTW14]{AOTW14}
+Per Austrin, Ryan O'Donnell, Li-Yang Tan, and John Wright.
+\newblock New {NP}-hardness results for 3-coloring and 2-to-1 label cover.
+\newblock {\em ACM Transactions on Computation Theory}, 6(1):Article 2, 2014.
+\newblock arXiv:1210.5648.
+
+\bibitem[Cha16]{Chan16}
+Siu~On Chan.
+\newblock Approximation resistance from pairwise-independent subgroups.
+\newblock {\em Journal of the ACM}, 63(3):Article 27, 2016.
+\newblock Preliminary version in STOC 2013.
+
+\bibitem[CST01]{CST01}
+Pierluigi Crescenzi, Riccardo Silvestri, and Luca Trevisan.
+\newblock On weighted vs unweighted versions of combinatorial optimization
+  problems.
+\newblock {\em Information and Computation}, 167(1):10--26, 2001.
+
+\bibitem[dKPW04]{dKPW04}
+Etienne de~Klerk, Dmitrii~V. Pasechnik, and Joost~P. Warners.
+\newblock On approximate graph colouring and {MAX}-$k$-{CUT} algorithms based
+  on the $\vartheta$-function.
+\newblock {\em Journal of Combinatorial Optimization}, 8(3):267--294, 2004.
+
+\bibitem[FJ97]{FJ97}
+Alan Frieze and Mark Jerrum.
+\newblock Improved approximation algorithms for {MAX} $k$-{CUT} and {MAX}
+  {BISECTION}.
+\newblock {\em Algorithmica}, 18(1):67--81, 1997.
+
+\bibitem[GS13]{GS13}
+Venkatesan Guruswami and Ali~Kemal Sinop.
+\newblock Improved inapproximability results for maximum $k$-colorable
+  subgraph.
+\newblock {\em Theory of Computing}, 9(11):413--435, 2013.
+\newblock Preliminary version in APPROX 2009; arXiv:0910.2271.
+
+\bibitem[GW04]{GW04}
+Michel~X. Goemans and David~P. Williamson.
+\newblock Approximation algorithms for {MAX-3-CUT} and other problems via
+  complex semidefinite programming.
+\newblock {\em Journal of Computer and System Sciences}, 68(2):442--470, 2004.
+\newblock Preliminary version in STOC 2001.
+
+\bibitem[H{\aa}s01]{Hastad01}
+Johan H{\aa}stad.
+\newblock Some optimal inapproximability results.
+\newblock {\em Journal of the ACM}, 48(4):798--859, 2001.
+
+\bibitem[Hei26]{Heilman26}
+Steven Heilman.
+\newblock Sharp hardness for {MAX-3-CUT} and quantum {MAX-CUT}.
+\newblock arXiv:2608.00333, 2026.
+
+\bibitem[HHM{\etalchar{+}}17]{HHMOW17}
+Johan H{\aa}stad, Sangxia Huang, Rajsekar Manokaran, Ryan O'Donnell, and John
+  Wright.
+\newblock Improved {NP}-inapproximability for 2-variable linear equations.
+\newblock {\em Theory of Computing}, 13(19):1--51, 2017.
+\newblock Preliminary version in APPROX 2015.
+
+\bibitem[IM12]{IM12}
+Marcus Isaksson and Elchanan Mossel.
+\newblock Maximally stable {G}aussian partitions with discrete applications.
+\newblock {\em Israel Journal of Mathematics}, 189:347--396, 2012.
+
+\bibitem[KKLP97]{KKLP97}
+Viggo Kann, Sanjeev Khanna, Jens Lagergren, and Alessandro Panconesi.
+\newblock On the hardness of approximating {Max} $k$-{Cut} and its dual.
+\newblock {\em Chicago Journal of Theoretical Computer Science}, 1997:Article
+  2, 1997.
+\newblock Preliminary version in ISTCS 1996.
+
+\bibitem[N{\etalchar{+}}25]{AlphaEvolve}
+Alexander Novikov et~al.
+\newblock {AlphaEvolve}: A coding agent for scientific and algorithmic
+  discovery.
+\newblock arXiv:2506.13131, 2025.
+
+\bibitem[NRT25]{NRT25}
+Ansh Nagda, Prabhakar Raghavan, and Abhradeep Thakurta.
+\newblock Reinforced generation of combinatorial structures: Hardness of
+  approximation.
+\newblock arXiv:2509.18057, 2025.
+\newblock Version 7, March 2026.
+
+\bibitem[Pet94]{Petrank94}
+Erez Petrank.
+\newblock The hardness of approximation: gap location.
+\newblock {\em Computational Complexity}, 4(2):133--157, 1994.
+
+\bibitem[TSSW00]{TSSW00}
+Luca Trevisan, Gregory~B. Sorkin, Madhu Sudan, and David~P. Williamson.
+\newblock Gadgets, approximation, and linear programming.
+\newblock {\em SIAM Journal on Computing}, 29(6):2074--2097, 2000.
+
+\end{thebibliography}
