@@ -1,0 +1,131 @@
+% The gadgets E, N (Section 3) and A_L, N_L for L=2 (Section 5).
+% Every edge is drawn explicitly, one \draw per edge; styles e1/e1p/u1 = weight 1, e3/u3 = weight 3.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  prim/.style={circle,draw,fill=black!15,inner sep=1pt,minimum size=14pt,font=\small},
+  aux/.style={circle,draw,fill=white,inner sep=0.8pt,minimum size=12.5pt,font=\scriptsize},
+  univ/.style={rectangle,draw,fill=black!5,inner sep=1pt,minimum size=12pt,font=\scriptsize},
+  e1/.style={line width=0.4pt},
+  e1p/.style={line width=0.4pt,black!60},
+  e3/.style={very thick},
+  u1/.style={line width=0.4pt,blue!60!black},
+  u3/.style={very thick,blue!60!black},
+  lab/.style={font=\small}]
+% ------------------------------------------------------------------ (a) E
+\begin{scope}[shift={(0,0)}]
+  \node[aux] (aA1) at (90:1.5) {$a_1$};
+  \node[aux] (aA4) at (30:1.5) {$a_4$};
+  \node[aux] (aA5) at (-30:1.5) {$a_5$};
+  \node[aux] (aA2) at (-90:1.5) {$a_2$};
+  \node[aux] (aA3) at (-150:1.5) {$a_3$};
+  \node[aux] (aA6) at (150:1.5) {$a_6$};
+  \node[prim] (pA1) at (90:0.6) {$p_1$};
+  \node[prim] (pA2) at (-30:0.6) {$p_2$};
+  \node[prim] (pA3) at (210:0.6) {$p_3$};
+  \draw[e1] (aA1) -- (aA4);
+  \draw[e1] (aA4) -- (aA5);
+  \draw[e1] (aA5) -- (aA2);
+  \draw[e1] (aA2) -- (aA3);
+  \draw[e1] (aA3) -- (aA6);
+  \draw[e1] (aA6) -- (aA1);
+  \draw[e1p] (pA1) -- (aA1);
+  \draw[e1p] (pA1) -- (aA2);
+  \draw[e1p] (pA1) -- (aA3);
+  \draw[e1p] (pA1) -- (aA4);
+  \draw[e1p] (pA2) -- (aA3);
+  \draw[e1p] (pA2) -- (aA4);
+  \draw[e1p] (pA2) -- (aA5);
+  \draw[e1p] (pA2) -- (aA6);
+  \draw[e1p] (pA3) -- (aA1);
+  \draw[e1p] (pA3) -- (aA2);
+  \draw[e1p] (pA3) -- (aA5);
+  \draw[e1p] (pA3) -- (aA6);
+  \node[lab] at (0,-2.05) {(a) $E$: 18 unit edges};
+\end{scope}
+% ------------------------------------------------------------------ (b) N
+\begin{scope}[shift={(8.2,0)}]
+  \node[prim] (pB1) at (90:1.2) {$p_1$};
+  \node[prim] (pB2) at (-30:1.2) {$p_2$};
+  \node[prim] (pB3) at (210:1.2) {$p_3$};
+  \node[aux] (qB) at (0,0) {$q$};
+  \draw[e1] (pB1) -- (pB2);
+  \draw[e1] (pB2) -- (pB3);
+  \draw[e1] (pB3) -- (pB1);
+  \draw[e3] (qB) -- (pB1);
+  \draw[e3] (qB) -- (pB2);
+  \draw[e3] (qB) -- (pB3);
+  \node[lab] at (0,-2.05) {(b) $N$: triangle (weight 1), star (weight 3)};
+\end{scope}
+% ------------------------------------------------------------------ (c) A_L, L=2
+\begin{scope}[shift={(0,-5.2)}]
+  \node[aux] (aC1) at (90:1.5) {$a_1$};
+  \node[aux] (aC4) at (30:1.5) {$a_4$};
+  \node[aux] (aC5) at (-30:1.5) {$a_5$};
+  \node[aux] (aC2) at (-90:1.5) {$a_2$};
+  \node[aux] (aC3) at (-150:1.5) {$a_3$};
+  \node[aux] (aC6) at (150:1.5) {$a_6$};
+  \node[prim] (pC1) at (90:0.6) {$p_1$};
+  \node[prim] (pC2) at (-30:0.6) {$p_2$};
+  \node[prim] (pC3) at (210:0.6) {$p_3$};
+  \node[univ] (zC1) at (-3,0) {$z_1$};
+  \node[univ] (zC2) at (3,0) {$z_2$};
+  \draw[e1] (aC1) -- (aC4);
+  \draw[e1] (aC4) -- (aC5);
+  \draw[e1] (aC5) -- (aC2);
+  \draw[e1] (aC2) -- (aC3);
+  \draw[e1] (aC3) -- (aC6);
+  \draw[e1] (aC6) -- (aC1);
+  \draw[e1p] (pC1) -- (aC1);
+  \draw[e1p] (pC1) -- (aC2);
+  \draw[e1p] (pC1) -- (aC3);
+  \draw[e1p] (pC1) -- (aC4);
+  \draw[e1p] (pC2) -- (aC3);
+  \draw[e1p] (pC2) -- (aC4);
+  \draw[e1p] (pC2) -- (aC5);
+  \draw[e1p] (pC2) -- (aC6);
+  \draw[e1p] (pC3) -- (aC1);
+  \draw[e1p] (pC3) -- (aC2);
+  \draw[e1p] (pC3) -- (aC5);
+  \draw[e1p] (pC3) -- (aC6);
+  % z_1 to all a_j
+  \draw[u1] (zC1) -- (aC6);
+  \draw[u1] (zC1) -- (aC3);
+  \draw[u1] (zC1) .. controls (-2.6,1.2) and (-1.0,1.85) .. (aC1);
+  \draw[u1] (zC1) .. controls (-2.6,-1.2) and (-1.0,-1.85) .. (aC2);
+  \draw[u1] (zC1) .. controls (-2.8,2.1) and (0.2,2.6) .. (aC4);
+  \draw[u1] (zC1) .. controls (-2.8,-2.1) and (0.2,-2.6) .. (aC5);
+  % z_2 to all a_j
+  \draw[u1] (zC2) -- (aC4);
+  \draw[u1] (zC2) -- (aC5);
+  \draw[u1] (zC2) .. controls (2.6,1.2) and (1.0,1.85) .. (aC1);
+  \draw[u1] (zC2) .. controls (2.6,-1.2) and (1.0,-1.85) .. (aC2);
+  \draw[u1] (zC2) .. controls (2.8,2.1) and (-0.2,2.6) .. (aC6);
+  \draw[u1] (zC2) .. controls (2.8,-2.1) and (-0.2,-2.6) .. (aC3);
+  % z_1 z_2
+  \draw[u3] (zC1) .. controls (-3,3.4) and (3,3.4) .. (zC2);
+  \node[lab] at (0,-2.45) {(c) $A_L$ for $L=2$: total weight $33$};
+\end{scope}
+% ------------------------------------------------------------------ (d) N_L, L=2
+\begin{scope}[shift={(8.2,-5.2)}]
+  \node[prim] (pD1) at (90:1.2) {$p_1$};
+  \node[prim] (pD2) at (-30:1.2) {$p_2$};
+  \node[prim] (pD3) at (210:1.2) {$p_3$};
+  \node[aux] (qD) at (0,0) {$q$};
+  \node[univ] (zD1) at (-2.5,0) {$z_1$};
+  \node[univ] (zD2) at (2.5,0) {$z_2$};
+  \draw[e1] (pD1) -- (pD2);
+  \draw[e1] (pD2) -- (pD3);
+  \draw[e1] (pD3) -- (pD1);
+  \draw[e3] (qD) -- (pD1);
+  \draw[e3] (qD) -- (pD2);
+  \draw[e3] (qD) -- (pD3);
+  \draw[u3] (qD) -- (zD1);
+  \draw[u3] (qD) -- (zD2);
+  \draw[u3] (zD1) -- (pD1);
+  \draw[u3] (zD1) -- (pD3);
+  \draw[u3] (zD1) .. controls (-2.0,-1.5) and (0.0,-1.7) .. (pD2);
+  \draw[u3] (zD2) -- (pD1);
+  \draw[u3] (zD2) -- (pD2);
+  \draw[u3] (zD2) .. controls (2.0,-1.5) and (0.0,-1.7) .. (pD3);
+  \node[lab] at (0,-2.45) {(d) $N_L$ for $L=2$: total weight $36$};
+\end{scope}
+\end{tikzpicture}

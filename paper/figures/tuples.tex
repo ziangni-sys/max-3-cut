@@ -1,0 +1,62 @@
+% The 27 tuples of Z_3^3 (x written as x_1x_2x_3) in the classes A, D, T_1, T_2.
+% Geometry shared with figures/barrier.tex: one 1cm column per 3 tuples, row height 0.46cm,
+% boxes A=[0,1], D=[1.75,3.75], T_1=[4.5,7.5], T_2=[8.25,11.25] (x, in cm).
+\begin{tikzpicture}[x=1cm,y=1cm,
+  cls/.style={draw,rounded corners=2pt,line width=0.5pt},
+  tup/.style={font=\small,inner sep=0pt},
+  hl/.style={tup,text=blue!60!black},
+  cname/.style={font=\small,inner sep=1pt},
+  cdesc/.style={font=\footnotesize,text=black!70,inner sep=1pt},
+  rlab/.style={font=\small,anchor=east,inner sep=1pt},
+  cell/.style={draw=black!45,line width=0.4pt},
+  hi/.style={cell,fill=black!12},
+  val/.style={font=\small},
+  neg/.style={<->,>={Stealth[length=4pt,width=3.5pt]},blue!60!black,line width=0.6pt},
+  brc/.style={decorate,decoration={brace,amplitude=4pt},line width=0.5pt},
+  note/.style={font=\footnotesize,anchor=west,text=black!70,inner sep=1pt}]
+\def\rh{0.46}\def\bt{1.58}% row height; top of the boxes (3*0.46 + 2*0.1)
+% ---------------------------------------------------------------- boxes
+\foreach \l/\r in {0/1, 1.75/3.75, 4.5/7.5, 8.25/11.25}
+  \draw[cls] (\l,0) rectangle (\r,\bt);
+% ---------------------------------------------------------------- tuples
+\foreach \i/\a/\d/\e/\p/\q/\r/\pp/\qq/\rr in {
+    0/000/012/021/001/010/100/002/020/200,
+    1/111/102/201/112/{}/211/221/{}/122,
+    2/222/120/210/022/202/220/011/101/110}{
+  \path (0,\bt-0.1-\i*\rh-0.5*\rh) coordinate (r);
+  \node[tup] at ([xshift=0.5cm]r)   {$\a$};
+  \node[tup] at ([xshift=2.25cm]r)  {$\d$};
+  \node[tup] at ([xshift=3.25cm]r)  {$\e$};
+  \node[tup] at ([xshift=5cm]r)     {$\p$};
+  \node[tup] at ([xshift=6cm]r)     {$\q$};
+  \node[tup] at ([xshift=7cm]r)     {$\r$};
+  \node[tup] at ([xshift=8.75cm]r)  {$\pp$};
+  \node[tup] at ([xshift=9.75cm]r)  {$\qq$};
+  \node[tup] at ([xshift=10.75cm]r) {$\rr$};}
+% the T_2 entry at each position is the negation of the T_1 entry there; one pair is highlighted
+\node[hl] at (6,\bt-0.1-1.5*\rh)    {$\mathbf{121}$};
+\node[hl] at (9.75,\bt-0.1-1.5*\rh) {$\mathbf{212}$};
+% ---------------------------------------------------------------- headers
+\foreach \c/\n/\d in {0.5/{\mathcal A}/all equal, 2.75/{\mathcal D}/all distinct,
+                      6/{\mathcal T_1}/{two equal, $s=1$}, 9.75/{\mathcal T_2}/{two equal, $s=2$}}{
+  \node[cname] at (\c,\bt+0.62) {$\n$};
+  \node[cdesc] at (\c,\bt+0.25) {\d};}
+\draw[brc] (0,\bt+0.92)    -- node[above=4pt,font=\small] {$\sat_0$\ \ ($s(x)=0$)} (3.75,\bt+0.92);
+\draw[brc] (4.5,\bt+0.92)  -- node[above=4pt,font=\small] {$\sat_1$} (7.5,\bt+0.92);
+\draw[brc] (8.25,\bt+0.92) -- node[above=4pt,font=\small] {$\sat_2$} (11.25,\bt+0.92);
+% ---------------------------------------------------------------- negation
+\node[rlab] at (-0.2,-0.3) {$x\mapsto -x$};
+\draw[neg] (0.3,-0.06)  to[out=-60,in=-120,looseness=1.6] (0.7,-0.06);
+\draw[neg] (2.45,-0.06) to[out=-50,in=-130,looseness=1.3] (3.05,-0.06);
+\draw[neg] (6,-0.06)    to[out=-14,in=-166] (9.75,-0.06);
+% ---------------------------------------------------------------- values (Lemma 3.1)
+\def\ya{-0.62}\def\yb{-1.12}\def\yc{-1.18}\def\yd{-1.68}
+\node[rlab] at (-0.2,{(\ya+\yb)/2}) {$V_E$};
+\node[rlab] at (-0.2,{(\yc+\yd)/2}) {$V_N$};
+\foreach \l/\r/\v/\s in {0/1/18/hi, 1.75/3.75/18/hi, 4.5/7.5/16/cell, 8.25/11.25/16/cell}
+  \draw[\s] (\l,\ya) rectangle node[val] {$\v$} (\r,\yb);
+\foreach \l/\r/\v/\s in {0/1/9/cell, 1.75/3.75/9/cell, 4.5/7.5/11/hi, 8.25/11.25/11/hi}
+  \draw[\s] (\l,\yc) rectangle node[val] {$\v$} (\r,\yd);
+\node[note] at (11.45,{(\ya+\yb)/2}) {larger iff $s(x)=0$};
+\node[note] at (11.45,{(\yc+\yd)/2}) {larger iff $s(x)\neq0$};
+\end{tikzpicture}

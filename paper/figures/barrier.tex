@@ -1,0 +1,48 @@
+% The distribution mu* of the barrier (Theorem 7.1) on the classes A, D, T_1, T_2.
+% Same geometry as figures/tuples.tex: boxes A=[0,1], D=[1.75,3.75], T_1=[4.5,7.5],
+% T_2=[8.25,11.25] (x, in cm); one dot per tuple, dot area proportional to its mu*-mass.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  cls/.style={draw,rounded corners=2pt,line width=0.5pt},
+  cname/.style={font=\small,inner sep=1pt},
+  cmass/.style={font=\footnotesize,inner sep=1pt},
+  rlab/.style={font=\small,anchor=east,inner sep=1pt},
+  cell/.style={draw=black!45,line width=0.4pt},
+  hi/.style={cell,fill=black!12},
+  val/.style={font=\small},
+  bnd/.style={font=\small,anchor=west,inner sep=1pt}]
+\def\rh{0.46}\def\bt{1.58}% row height; top of the boxes
+\def\ra{0.0968}% dot radius on A (mass 5/87)
+\def\rb{0.075}%  dot radius elsewhere (mass 1/29 = 3/87); area ratio 5:3
+% ---------------------------------------------------------------- boxes and dots
+\foreach \l/\r in {0/1, 1.75/3.75, 4.5/7.5, 8.25/11.25}
+  \draw[cls] (\l,0) rectangle (\r,\bt);
+\foreach \i in {0,1,2}{
+  \fill[black!60] (0.5,\bt-0.1-\i*\rh-0.5*\rh) circle[radius=\ra];
+  \foreach \x in {2.25,3.25,5,6,7,8.75,9.75,10.75}
+    \fill[black!60] (\x,\bt-0.1-\i*\rh-0.5*\rh) circle[radius=\rb];}
+\node[rlab] at (-0.2,0.5*\bt) {$\mu^\ast$};
+% ---------------------------------------------------------------- headers
+\foreach \c/\n/\m in {0.5/{\mathcal A}/{\tfrac{5}{29}=3\cdot\tfrac{5}{87}},
+                      2.75/{\mathcal D}/{\tfrac{6}{29}=6\cdot\tfrac{1}{29}},
+                      6/{\mathcal T_1}/{\tfrac{9}{29}=9\cdot\tfrac{1}{29}},
+                      9.75/{\mathcal T_2}/{\tfrac{9}{29}=9\cdot\tfrac{1}{29}}}{
+  \node[cname] at (\c,\bt+0.66) {$\n$};
+  \node[cmass] at (\c,\bt+0.27) {$\m$};}
+% ---------------------------------------------------------------- certificate grid
+\node[font=\small,anchor=south west,inner sep=1pt] at (11.45,-0.25) {$\mathbb{E}_{\mu^\ast}V_t\,/\,C_t\ \ge$};
+\foreach \t/\a/\d/\p/\q/\b in {
+   0/sat/sat/{\tfrac{9}{18}}/{\tfrac{9}{18}}/{\tfrac{11}{29}+\tfrac{18}{29}\cdot\tfrac{8}{9}=\tfrac{27}{29}},
+   1/{\tfrac{5}{20}}/{\tfrac{6}{20}}/sat/{\tfrac{9}{20}}/{\tfrac{9}{29}+\tfrac{20}{29}\cdot\tfrac{9}{10}=\tfrac{27}{29}},
+   2/{\tfrac{5}{20}}/{\tfrac{6}{20}}/{\tfrac{9}{20}}/sat/{\tfrac{9}{29}+\tfrac{20}{29}\cdot\tfrac{9}{10}=\tfrac{27}{29}}}{
+  \pgfmathsetmacro\yt{-0.3-\t*0.62}
+  \pgfmathsetmacro\yb{\yt-0.56}
+  \node[rlab] at (-0.2,{(\yt+\yb)/2}) {$t=\t$};
+  \foreach \l/\r/\v in {0/1/\a, 1.75/3.75/\d, 4.5/7.5/\p, 8.25/11.25/\q}{
+    \edef\tmp{\v}\def\satstr{sat}%
+    \ifx\tmp\satstr
+      \draw[hi] (\l,\yt) rectangle node[val] {$\sat_{\t}$} (\r,\yb);
+    \else
+      \draw[cell] (\l,\yt) rectangle node[val] {$\v$} (\r,\yb);
+    \fi}
+  \node[bnd] at (11.45,{(\yt+\yb)/2}) {$\b$};}
+\end{tikzpicture}
