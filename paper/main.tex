@@ -81,8 +81,9 @@ of the form $1-\Theta(1/k)$, and Guruswami and Sinop~\cite{GS13} proved bounds o
 $k$-colourable graphs. The current
 record for $k=3$ was set by Austrin, O'Donnell, Tan and Wright~\cite{AOTW14}: using a PCP designed for the
 purpose, they showed that \MC{3} is NP-hard to approximate within $16/17+\eps$, even on $3$-colourable
-graphs. Combined with a reduction of Guruswami and Sinop, the same result gives the best previously
-stated bounds for every $k\ge4$, such as $85/86$ for \MC{4}~\cite{AOTW14}. Most recently, Nagda, Raghavan
+graphs. Combined with a reduction of Guruswami and Sinop, the same result gives bounds for every
+$k\ge4$, such as $85/86$ for \MC{4}~\cite{AOTW14}; on $k$-colourable graphs, and on general graphs for
+$k\ge5$, these are the best previously stated bounds. Most recently, Nagda, Raghavan
 and Thakurta~\cite{NRT25} used the AlphaEvolve system~\cite{AlphaEvolve} to search for gadget reductions
 from H\aa stad's linear equations~\cite{Hastad01}. This improved the bound for \MC{4} to about $0.987$,
 but for \MC{3} their gadgets give only $55/57\approx0.965$, short of $16/17$. \Cref{tab:summary} collects
@@ -90,7 +91,7 @@ these bounds.
 
 \subsection{Our results}
 
-Our first result breaks the $16/17$ barrier for \MC{3}.
+Our first result improves the $16/17$ bound for \MC{3}.
 
 \begin{theorem}\label{thm:main3}
 For every $\eps>0$ it is NP-hard, given a weighted graph $G$, to distinguish between the case that some
@@ -140,7 +141,7 @@ $k=7$ & $136/137\approx 0.993$ & $202/205\approx 0.985$ & $136/137$~\cite{AOTW14
 \end{tabular}
 \caption{NP-hardness of approximation for \MC{k}; smaller factors are stronger. The previous values for
 $k\ge4$ are instances of the general formula $1-\frac1{17(k+c_k)+c_k}$, $c_k=k\bmod3$,
-of~\cite[Thm.~1.2]{AOTW14}.}
+of~\cite[Thm.~1.2]{AOTW14}, except the value $0.987$ of~\cite{NRT25}.}
 \label{tab:summary}
 \end{table}
 
@@ -165,7 +166,7 @@ H\aa stad~\cite{Hastad01} proved that for systems of equations $x_1+x_2+x_3 = t$
 to distinguish almost satisfiable systems from systems in which every assignment satisfies at most a
 $1/3+\eps$ fraction of the equations. The classical way to turn this into hardness for a graph problem,
 introduced by Trevisan, Sorkin, Sudan and Williamson~\cite{TSSW00} for $\Z_2$ and used for $\Z_3$
-by~\cite{NRT25}, replaces each equation by a small graph, a \emph{gadget}, whose best cut is larger when
+by~\cite{NRT25}, replaces each equation by a small graph, a \emph{gadget} (\cref{fig:reduction}), whose best cut is larger when
 the equation is satisfied. For $t\ne0$, however, the predicate ``$x_1+x_2+x_3=t$'' is not invariant under
 renaming the colours, so its gadget must refer to a fixed set of \emph{global} vertices that play the role
 of the colours $0,1,2$. In a cheating colouring all global vertices may receive the same colour, and
@@ -179,18 +180,19 @@ right-hand side $-t$. If every assignment satisfies at most a $1/3+\eps$ fractio
 applying this to both $X$ and $-X$ shows that, for a random equation, the sum $s$ of its variables under
 $X$ satisfies $s=t$ or $s=-t$ with probability at most about $2/3$. It is therefore enough for the gadgets of
 the equations with $t=\pm1$ to detect whether $s\ne0$, which simply means that exactly two of the three variables are equal (\cref{fig:tuples}). This predicate is invariant under all permutations of the colours, needs no global
-vertices, and is detected by a triangle together with one extra vertex. Combined with the gadget
+vertices, and is detected by a triangle together with one extra vertex (the gadget $N$ of \cref{fig:gadgets}(b)). Combined with the gadget
 of~\cite{NRT25} for $t=0$, this proves \cref{thm:main3} in a few lines (\cref{sec:three}).
 
 \paragraph{A soundness criterion.}
 For $k\ge4$ the satisfying colourings use only three of the $k$ colours, and global vertices become
 necessary again. We prove a general criterion for gadget reductions from H\aa stad's equations
-(\cref{thm:S}): the hardness factor equals
+(\cref{thm:S}): under a mild symmetry condition, the gadgets give NP-hardness of approximation within
+$\rho+\delta$ for every $\delta>0$, where
 \[
   \rho \;=\; \frac{\max_{x,y}\; \sum_{t} V_t(x,y)}{\sum_{t} C_t},
 \]
-where $V_t(x,y)$ is the value of the gadget for right-hand side $t$ when its three variables receive the
-colours $x$ and the global vertices the colours $y$, and $C_t$ is its value on satisfying colourings. In
+$V_t(x,y)$ is the value of the gadget for right-hand side $t$ when its three variables receive the
+colours $x$ and the global vertices the colours $y$, and $C_t$ is its least value on satisfying colourings. In
 words, a cheating colouring can do no better than to use a single colour pattern $x$ on all equations,
 and each pattern is charged with the sum of the values of all three gadgets. The proof decodes a
 colouring of the graph into many assignments of H\aa stad's instance and uses a short Fourier-analytic
@@ -230,13 +232,14 @@ statement at the end of the paper.
 \Cref{sec:prelim} fixes notation and states H\aa stad's theorem in the form we use. \Cref{sec:three} proves
 \cref{thm:main3}, \cref{sec:S} the soundness criterion, and \cref{sec:family} \cref{thm:main45}.
 \Cref{sec:universal} treats universal vertices and \cref{thm:perfect}, \cref{sec:barrier} the barrier, and
-\cref{sec:discussion} open problems.
+\cref{sec:discussion} open problems. \Cref{app:remarks} collects further remarks on the soundness criterion,
+and \cref{app:comp} describes the computations.
 
 \section{Preliminaries}\label{sec:prelim}
 
 \paragraph{Cuts.} We write $[k]=\{0,1,\dots,k-1\}$ and identify $[3]$ with $\Z_3$. A (weighted) graph
 $G=(V,E,w)$ has non-negative edge weights; for a colouring $\chi\colon V\to[k]$ let
-$\cut_\chi(G)=\sum_{\{u,v\}\in E} w_{uv}\,[\chi(u)\neq\chi(v)]$ and $w(G)=\sum_e w_e$. We say that
+$\cut_\chi(G)=\sum_{\{u,v\}\in E} w_{uv}\,[\chi(u)\neq\chi(v)]$ and $w(G)=\sum_{\{u,v\}\in E} w_{uv}$. We say that
 \MC{k} is $(c,s)$-hard if it is NP-hard to distinguish $\max_\chi \cut_\chi(G)\ge c\,w(G)$ from
 $\max_\chi \cut_\chi(G)\le s\, w(G)$; this implies NP-hardness of approximation within $s/c$. Weights may
 be removed at an arbitrarily small loss by the method of~\cite{CST01}; see~\cite[Remark~2.6]{GS13} for
@@ -290,8 +293,9 @@ the maximum being over the colours of the auxiliary vertices. Let $\yc=(0,1,\dot
 colouring of the globals. The value of a colouring does not change when the $k$ colours are permuted, so
 we may normalise the colours of the globals: let $\Y_k\subseteq[k]^k$ contain one representative of each
 orbit under permutations of the colours (we use restricted growth strings: the first entry is $0$, and
-each entry exceeds the maximum of the previous ones by at most $1$). Maxima of $V_I$, or of sums of
-several $V_I$, over $y\in\Y_k$ then equal the maxima over all $y\in[k]^k$; the normalisation is only a
+each entry exceeds the maximum of the previous ones by at most $1$). Since $V_I(\pi x,\pi y)=V_I(x,y)$ for every
+permutation $\pi$ of $[k]$, maxima of $V_I$, or of sums of several $V_I$, jointly over $x\in[k]^3$ and
+$y\in\Y_k$ equal the maxima over $x\in[k]^3$ and all $y\in[k]^k$; the normalisation is only a
 computational saving. A \emph{family} for $\lin$ is a triple $(I_0,I_1,I_2)$ of gadgets, $I_t$ to be used for equations of
 type $t$. We write $V_t=V_{I_t}$ and $S_y(x)=\sum_tV_t(x,y)$. Let
 $\sat_t=\{x\in\Z_3^3: x_1+x_2+x_3=t\}$ be the set of \emph{satisfying} tuples of type $t$; they use only the
@@ -324,7 +328,7 @@ since the auxiliary vertices of different copies are disjoint.
 weight $\frac13$, one of each type. Each variable is a single vertex, shared by the equations that contain
 it ($u_1$, $w_2$ and $w_3$ occur twice). Each equation $e$ contributes a copy of $I_{t_e}$ scaled by
 $\lambda_e$ (box) with new auxiliary vertices (small circles, schematic); its primaries $p_1,p_2,p_3$
-(labelled on the top copy) are identified with $u_e,w_e,w'_e$ and its globals with the shared vertices
+(labelled on the top copy) are identified with $u_e,w_e,w'_e$ (grey lines, which mark identifications and are not edges of $J$) and its globals with the shared vertices
 $g_0,\dots,g_{k-1}$ (dashed line, drawn behind the boxes), so different copies meet only in variable
 vertices and globals. \Cref{sec:S} decodes a colouring $\chi$ into the assignment $u\mapsto a(\chi(u))$ on
 $U$, $w\mapsto b(\chi(w))$ on $W$, for arbitrary maps $a,b\colon[k]\to\Z_3$.}
@@ -341,8 +345,8 @@ exactly two of them are equal (\cref{fig:tuples}).
 \begin{figure}[t]
 \centering
 \input{figures/tuples}
-\caption{The $27$ tuples $x=x_1x_2x_3\in\Z_3^3$, grouped by $s(x)=x_1+x_2+x_3$ into the classes
-$\mathcal A$, $\mathcal D$, $\mathcal T_1$, $\mathcal T_2$; the tuples with $s(x)=t$ form $\sat_t$, so
+\caption{The $27$ tuples $x=x_1x_2x_3\in\Z_3^3$ in the classes $\mathcal A$ (all equal), $\mathcal D$
+(all distinct), $\mathcal T_1$, $\mathcal T_2$ (two equal, $s(x)=x_1+x_2+x_3=1$ resp.\ $2$); the tuples with $s(x)=t$ form $\sat_t$, so
 $\sat_0=\mathcal A\cup\mathcal D$, $\sat_1=\mathcal T_1$ and $\sat_2=\mathcal T_2$. Negation $x\mapsto-x$
 maps $\mathcal A$ and $\mathcal D$ to themselves (on $\mathcal D$ it exchanges the two columns) and maps
 each tuple of $\mathcal T_1$ to the tuple of $\mathcal T_2$ at the same position (e.g.\ $121\mapsto212$).
@@ -353,7 +357,7 @@ $\mathcal T_1$ from $\mathcal T_2$.}
 \end{figure}
 
 \begin{itemize}
-\item The \emph{E-gadget} $E$ is the type-$0$ gadget of~\cite[Lemma~C.1]{NRT25}: auxiliary vertices
+\item The \emph{E-gadget} $E$ (\cref{fig:gadgets}(a)) is the type-$0$ gadget of~\cite[Lemma~C.1]{NRT25}: auxiliary vertices
 $a_1,\dots,a_6$ and the $18$ unit-weight edges
 \[
 \begin{array}{l}
@@ -374,7 +378,7 @@ one auxiliary vertex $q$ joined to $p_1,p_2,p_3$ by edges of weight $3$ (total w
 \input{figures/gadgets}
 \caption{Left: the gadgets of \cref{thm:main3}; right: their extensions for \MC{k} with $k=3+L$
 (\cref{sec:family}), drawn for $L=2$. Thin edges have weight~$1$ and very thick edges weight~$3$; primaries
-are grey, universal vertices are squares, and edges at universal vertices are blue. (a)~The type-$0$
+are grey, the universal vertices $z_1,\dots,z_L$ (the globals $g_3,\dots,g_{k-1}$) are squares, and edges at universal vertices are blue. (a)~The type-$0$
 gadget $E$ of~\cite{NRT25}, whose auxiliary vertices form the $6$-cycle $a_1a_4a_5a_2a_3a_6$; (b)~the
 gadget $N$ for types $1$ and~$2$; (c)~$A_L$ adds an edge of weight~$1$ from every $a_j$ to every $z_i$
 (none from the primaries) and one of weight~$3$ between any two $z_i$; (d)~$N_L$ adds edges of weight~$3$
@@ -463,9 +467,9 @@ $\sum_{t,x}P(t,x)V_t(x,y)$. If, under $P$, the type $t$ were uniform and indepen
 pattern $x$, this would be an average of $\frac13S_y(x)$ over patterns, hence at most
 $\frac13\max_xS_y(x)$. To compare $P$ with such a distribution, we decode $\chi$ into assignments of
 $\Phi$: for any two maps $a,b\colon[k]\to\Z_3$, a $U$-variable of colour $c$ gets the value $a(c)$ and a
-$W$-variable of colour $c$ gets the value $b(c)$ (\cref{fig:reduction}). By \cref{thm:hastad}, each
-decoded assignment satisfies only about a third of the equations, so every test $g_{a,b}$ defined below
-sees $t$ as uniform and independent of $x$. The spanning lemma (\cref{lem:span}) shows that these tests
+$W$-variable of colour $c$ gets the value $b(c)$ (\cref{fig:reduction}). In the NO case $\val(\Phi)\le\frac13+\eps$ of \cref{thm:hastad}, each
+decoded assignment satisfies at most $\frac13+\eps$, and hence (shifting $a$) at least $\frac13-2\eps$, of
+the equations, so every test $g_{a,b}$ defined below sees $t$ as nearly uniform and independent of $x$. The spanning lemma (\cref{lem:span}) shows that these tests
 detect every dependence between $t$ and $x$ that can affect the cut.
 
 Two features of the decoding explain the hypotheses. The two $W$-variables of an equation are decoded by
@@ -569,7 +573,7 @@ $y^\ast$, and the auxiliary vertices optimally.
 
 In the language of the proof of \cref{thm:S}, $\Phi_0$ realises the distribution
 $P(t,x)=\frac13[x=x^\ast]$, which satisfies $\langle P,g_{a,b}\rangle=\frac13$ for all $a,b$ and so passes
-every test. Moreover, if the maximum in $\rho$ is attained at a tuple with $x^\ast_2=x^\ast_3$, then
+every test. Moreover, if the maximum in $\rho$ is attained at some $(x^\ast,y^\ast)$ with $x^\ast_2=x^\ast_3$, then
 \emph{every} $J(\Phi)$ with $\Phi$ balanced has a colouring of value $\frac13\max_{x,y}S_y(x)$: colour all
 of $U$ by $x^\ast_1$, all of $W$ by $x^\ast_2$ and the globals by $y^\ast$. The analysis is then exact for
 every instance, not only for $\Phi_0$. This is the case for all families in this paper, where the maximum
@@ -690,8 +694,9 @@ monochromatic weight is at least $\mathrm{unc}_3(G)$. The total weight follows f
 \end{proof}
 
 If $G$ comes from a $(c,s)$-hard instance of \MC{3} with $\Delta_c=1-c$ and $\Delta_s=1-s$, choose
-$\kappa=\Delta_sM$. Then $\mathrm{unc}_{3+L}(H)\le\Delta_cM$ in the YES case and $\ge\Delta_sM$ in the NO case,
-so \MC{3+L} is hard within
+$\kappa=\Delta_sM$, so that $w(H)=m_LM$ with $m_L$ as in~\eqref{eq:universal-ratio}. Then
+$\mathrm{unc}_{3+L}(H)\le\Delta_cM$ in the YES case and $\ge\Delta_sM$ in the NO case, so \MC{(3+L)} is
+hard within
 \begin{equation}\label{eq:universal-ratio}
   \frac{m_L-\Delta_s}{m_L-\Delta_c},\qquad m_L = 1+\tfrac{2L}{3}+\tbinom L2\Delta_s .
 \end{equation}
@@ -743,12 +748,15 @@ $\sat_2=\mathcal T_2$. Let $\mu^\ast$ be uniform within each class, with class m
 \]
 that is, mass $\frac5{29}$ on $\mathcal A$ and $\frac1{29}$ on every other tuple (\cref{fig:barrier}). A
 type-$t$ gadget is guaranteed its completeness value $C_t$ on $\sat_t$. On the unsatisfying tuples we use a
-certificate (\cref{lem:dual}) that is valid for one particular distribution of inputs: uniform on
-$\mathcal T_1\cup\mathcal T_2$ for type $0$, and in the proportions $5:6:9$ on
+certificate (\cref{lem:dual}) that guarantees on average a fraction $\frac89$ of $C_0$ for type $0$ and
+$\frac9{10}$ of $C_t$ for $t=1,2$ (\cref{tab:certs}), but only for one particular distribution of inputs:
+uniform on $\mathcal T_1\cup\mathcal T_2$ for type $0$, and in the proportions $5:6:9$ on
 $\mathcal A,\mathcal D,\mathcal T_2$ for type $1$ (on $\mathcal A,\mathcal D,\mathcal T_1$ for type $2$).
 These requirements determine $\mu^\ast$: it is the only distribution, uniform within each class, whose
 conditional distribution on the unsatisfying tuples of each type is that of the certificate. With these
-masses all three types end at the same value, $\frac{11}{29}+\frac{18}{29}\cdot\frac89 =
+masses all three types end at the same lower bound on $\mathbb E_{\mu^\ast}V_t/C_t$, namely
+$\mu^\ast(\sat_t)$ plus the unsatisfying mass times the certificate's fraction:
+$\frac{11}{29}+\frac{18}{29}\cdot\frac89 =
 \frac{9}{29}+\frac{20}{29}\cdot\frac{9}{10} = \frac{27}{29}$.
 
 \begin{figure}[t]
@@ -805,7 +813,7 @@ $2$ & $\mathcal T_2$ & $\mathcal A,\mathcal D,\mathcal T_1$ in proportions $5:6:
 \bottomrule
 \end{tabular}
 \caption{The certificates of \cref{lem:dual} used for \cref{thm:barrier}. In each, $x_r$ is uniform within
-each class and never satisfying; ``rows'' is the number of rows of positive weight, and the last column is
+each class and never satisfying; ``rows'' is the number of pairs $r$ (the \emph{rows} of the certificate) with positive weight under $\nu$, and the last column is
 the common denominator of the stored exact certificate (\cref{app:comp}).}
 \label{tab:certs}
 \end{table}
@@ -879,11 +887,10 @@ $\frac13\pm O(\eps)$.
 
 \begin{remark}[Comparison with the per-type analysis]\label{rem:pertype}
 For $k=3$, \cref{thm:S} is never worse than the per-type analysis. Every $x\in\Z_3^3$ satisfies exactly
-one type $t(x)$, so $S_y(x)\le S_1(t(x))+\sum_{t\ne t(x)}S_2(t)$, where $S_1(t)$ and $S_2(t)$ are the
+one type $t(x)$, so $S_y(x)\le V^+_{t(x)}+\sum_{t\ne t(x)}V^-_t$, where $V^+_t$ and $V^-_t$ are the
 maxima of $V_t$ over satisfying resp.\ unsatisfying $x$ and all $y$; hence
-$\rho\le(\sum_tS_2(t)+\max_t(S_1(t)-S_2(t)))/\sum_tC_t$, which is the bound of the per-type reduction
-theorem~\cite[Thm.~C.2]{NRT25}. With $S_1(t)=C_t$ and $S_2(t)=C_t-d$ this is $1-2/\sum_t\alpha_t$,
-$\alpha_t=C_t/d$. \Cref{thm:S} can be much better because a tuple that is unsatisfying for two types need
+$\rho\le(\sum_tV^-_t+\max_t(V^+_t-V^-_t))/\sum_tC_t$, which is the bound of the per-type reduction
+theorem~\cite[Thm.~C.2]{NRT25}. With $V^+_t=C_t$ and $V^-_t=C_t-d$ this is $1-2d/\sum_tC_t$. \Cref{thm:S} can be much better because a tuple that is unsatisfying for two types need
 not be bad for both gadgets simultaneously.
 \end{remark}
 
@@ -902,10 +909,10 @@ $\langle v^t_\xi,v^t_{\xi'}\rangle=1-\frac{k}{k-1}\Pr_x[\chi^t_x(\xi)\ne\chi^t_x
 Frieze--Jerrum objective $\sum w_{\xi\xi'}\frac{k-1}{k}(1-\langle v^t_\xi,v^t_{\xi'}\rangle)$ equals
 $\mathbb E_xV_t(x,\yc)\ge C_t$. On the set $B$ of primary and global vertices, the disagreement
 probabilities do not depend on $t$ (any two primaries are independent and uniform on $\{0,1,2\}$), so the
-Gram matrix of $(v^t_\xi)_{\xi\in B}$ is the same for all $t$. Fix vectors $(f_\xi)_{\xi\in B}$ with this Gram
-matrix, let $R_t$ be the isometry from $\mathrm{span}\{v^t_\xi:\xi\in B\}$ onto $\mathrm{span}\{f_\xi\}$ with
+Gram matrix of $(v^t_\xi)_{\xi\in B}$ is the same for all $t$. Fix vectors $(f_\xi)_{\xi\in B}$ in some $\R^m$ with this Gram
+matrix, let $\Psi_t$ be the isometry from $\mathrm{span}\{v^t_\xi:\xi\in B\}$ onto $\mathrm{span}\{f_\xi\}$ with
 $v^t_\xi\mapsto f_\xi$, and $\Pi_t$ the orthogonal projection onto the former span. In a direct sum
-$\R^m\oplus H_0\oplus H_1\oplus H_2$ put $\tilde v_\xi=R_t\Pi_tv^t_\xi+\iota_t(v^t_\xi-\Pi_tv^t_\xi)$ for $\xi$ in $I_t$,
+$\R^m\oplus H_0\oplus H_1\oplus H_2$ put $\tilde v_\xi=\Psi_t\Pi_tv^t_\xi+\iota_t(v^t_\xi-\Pi_tv^t_\xi)$ for $\xi$ in $I_t$,
 where $\iota_t$ embeds into $H_t$. Then $\tilde v_\xi=f_\xi$ on $B$ and all inner products within each $I_t$ are
 preserved, so this is a vector solution for $I_0\cup I_1\cup I_2$ (glued along $B$) with objective at least
 $\sum_tC_t$, in which every edge has inner product $\ge-\frac1{k-1}$. (Auxiliary vertices of different
@@ -963,7 +970,7 @@ $S=V_{2A_1}+2V_{N_1}$ & $72$ & $90$ & $82$ & $88$ & $90$ & $90$ & $90$\\
 \caption{Gadget values of the family $(2A_1,N_1,N_1)$ for \MC{4} ($L=1$), by colour pattern.}
 \label{tab:L1}
 \end{table}
- \texttt{scripts/verify\_sym3.py} checks \cref{lem:EN} and the identity~\eqref{eq:identity};
+ \noindent\texttt{scripts/verify\_sym3.py} checks \cref{lem:EN} and the identity~\eqref{eq:identity};
 the end-to-end reduction of \cref{sec:three} was also tested on random small instances of $\lin$ by brute
 force.
 
@@ -986,7 +993,7 @@ that $\sum\theta$ equals $\frac89$ resp.\ $\frac9{10}$, and verifies~\eqref{eq:d
 elements of $\Omega$, including all $\binom{3^9}{2}$ pairs of columns, with integer-valued floating-point
 matrix products whose partial sums stay below $2^{53}$ (hence exact). A second, independently written
 checker (\texttt{check\_exact\_pairwise.py}) writes the slack of a pair of columns $(f,f')$ as a sum of
-unary and pairwise terms in the nine pairs $(f(s),f'(s))$, $s\in\sat_t$, and minimises it exactly over
+unary and pairwise terms in the nine pairs $(f(x),f'(x))$, $x\in\sat_t$, and minimises it exactly over
 all $9^9$ choices of these pairs. Both find
 minimum slack $0$.
 
