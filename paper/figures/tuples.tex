@@ -5,15 +5,16 @@
   cls/.style={draw,rounded corners=2pt,line width=0.5pt},
   tup/.style={font=\small,inner sep=0pt},
   hl/.style={tup,text=blue!60!black},
-  cname/.style={font=\small,inner sep=1pt},
-  cdesc/.style={font=\footnotesize,text=black!70,inner sep=1pt},
+  cname/.style={font=\small,inner sep=1pt,text height=1.6ex,text depth=0.5ex},
+  cdesc/.style={font=\footnotesize,text=black!70,inner sep=1pt,text height=1.6ex,text depth=0.5ex},
   rlab/.style={font=\small,anchor=east,inner sep=1pt},
   cell/.style={draw=black!45,line width=0.4pt},
   hi/.style={cell,fill=black!12},
   val/.style={font=\small},
   neg/.style={<->,>={Stealth[length=4pt,width=3.5pt]},blue!60!black,line width=0.6pt},
   brc/.style={decorate,decoration={brace,amplitude=4pt},line width=0.5pt},
-  note/.style={font=\footnotesize,anchor=west,text=black!70,inner sep=1pt}]
+  note/.style={font=\footnotesize,anchor=west,text=black!70,inner sep=1pt},
+  slab/.style={above=4pt,font=\small,inner sep=1pt,text height=1.7ex,text depth=0.5ex}]
 \def\rh{0.46}\def\bt{1.58}% row height; top of the boxes (3*0.46 + 2*0.1)
 % ---------------------------------------------------------------- boxes
 \foreach \l/\r in {0/1, 1.75/3.75, 4.5/7.5, 8.25/11.25}
@@ -41,22 +42,22 @@
                       6/{\mathcal T_1}/{two equal, $s=1$}, 9.75/{\mathcal T_2}/{two equal, $s=2$}}{
   \node[cname] at (\c,\bt+0.62) {$\n$};
   \node[cdesc] at (\c,\bt+0.25) {\d};}
-\draw[brc] (0,\bt+0.92)    -- node[above=4pt,font=\small] {$\sat_0$\ \ ($s(x)=0$)} (3.75,\bt+0.92);
-\draw[brc] (4.5,\bt+0.92)  -- node[above=4pt,font=\small] {$\sat_1$} (7.5,\bt+0.92);
-\draw[brc] (8.25,\bt+0.92) -- node[above=4pt,font=\small] {$\sat_2$} (11.25,\bt+0.92);
+\draw[brc] (0,\bt+0.92)    -- node[slab] {$\sat_0$\ \ ($s(x)=0$)} (3.75,\bt+0.92);
+\draw[brc] (4.5,\bt+0.92)  -- node[slab] {$\sat_1$} (7.5,\bt+0.92);
+\draw[brc] (8.25,\bt+0.92) -- node[slab] {$\sat_2$} (11.25,\bt+0.92);
 % ---------------------------------------------------------------- negation
 \node[rlab] at (-0.2,-0.3) {$x\mapsto -x$};
 \draw[neg] (0.3,-0.06)  to[out=-60,in=-120,looseness=1.6] (0.7,-0.06);
 \draw[neg] (2.45,-0.06) to[out=-50,in=-130,looseness=1.3] (3.05,-0.06);
 \draw[neg] (6,-0.06)    to[out=-14,in=-166] (9.75,-0.06);
 % ---------------------------------------------------------------- values (Lemma 3.1)
-\def\ya{-0.62}\def\yb{-1.12}\def\yc{-1.18}\def\yd{-1.68}
-\node[rlab] at (-0.2,{(\ya+\yb)/2}) {$V_E$};
-\node[rlab] at (-0.2,{(\yc+\yd)/2}) {$V_N$};
+\def\yA{-0.62}\def\yB{-1.12}\def\yC{-1.18}\def\yD{-1.68}
+\node[rlab] at (-0.2,{(\yA+\yB)/2}) {$V_E$};
+\node[rlab] at (-0.2,{(\yC+\yD)/2}) {$V_N$};
 \foreach \l/\r/\v/\s in {0/1/18/hi, 1.75/3.75/18/hi, 4.5/7.5/16/cell, 8.25/11.25/16/cell}
-  \draw[\s] (\l,\ya) rectangle node[val] {$\v$} (\r,\yb);
+  \draw[\s] (\l,\yA) rectangle node[val] {$\v$} (\r,\yB);
 \foreach \l/\r/\v/\s in {0/1/9/cell, 1.75/3.75/9/cell, 4.5/7.5/11/hi, 8.25/11.25/11/hi}
-  \draw[\s] (\l,\yc) rectangle node[val] {$\v$} (\r,\yd);
-\node[note] at (11.45,{(\ya+\yb)/2}) {larger iff $s(x)=0$};
-\node[note] at (11.45,{(\yc+\yd)/2}) {larger iff $s(x)\neq0$};
+  \draw[\s] (\l,\yC) rectangle node[val] {$\v$} (\r,\yD);
+\node[note] at (11.45,{(\yA+\yB)/2}) {larger iff $s(x)=0$};
+\node[note] at (11.45,{(\yC+\yD)/2}) {larger iff $s(x)\neq0$};
 \end{tikzpicture}

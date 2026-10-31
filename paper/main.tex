@@ -6,6 +6,9 @@
 \usepackage[capitalise,nameinlink]{cleveref}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -144,7 +147,13 @@ of~\cite[Thm.~1.2]{AOTW14}.}
 \begin{figure}[t]
 \centering
 \input{figures/bounds}
-\caption{BOUNDSCAPTION}
+\caption{NP-hardness of approximation for \MC{k}, $3\le k\le24$, plotted as $1-{}$(hardness factor) on a
+logarithmic scale, so higher points are stronger bounds. The plotted values are $2/\Gamma_{k-3}$ for
+\cref{thm:main45} (general graphs), $3/(51+34L+3\binom L2)$ with $L=k-3$ for \cref{thm:perfect}
+($k$-colourable graphs, $k\ge4$), and $1/(17(k+c_k)+c_k)$ with $c_k=k\bmod3$ for the previous bound
+of~\cite{AOTW14} ($1/17$ for $k=3$); the diamond is the bound $0.987$ of~\cite{NRT25} for \MC{4}.
+\Cref{thm:main45} is the strongest of the three for $k\le14$, \cref{thm:perfect} for $15\le k\le20$,
+and~\cite{AOTW14} for $k\ge21$; in the shaded range $k\le20$ this paper improves the best previous bound.}
 \label{fig:bounds}
 \end{figure}
 
@@ -284,11 +293,12 @@ orbit under permutations of the colours (we use restricted growth strings: the f
 each entry exceeds the maximum of the previous ones by at most $1$). Maxima of $V_I$, or of sums of
 several $V_I$, over $y\in\Y_k$ then equal the maxima over all $y\in[k]^k$; the normalisation is only a
 computational saving. A \emph{family} for $\lin$ is a triple $(I_0,I_1,I_2)$ of gadgets, $I_t$ to be used for equations of
-type $t$. We write $V_t=V_{I_t}$, $S_y(x)=\sum_tV_t(x,y)$, and define the \emph{completeness}
+type $t$. We write $V_t=V_{I_t}$ and $S_y(x)=\sum_tV_t(x,y)$. Let
+$\sat_t=\{x\in\Z_3^3: x_1+x_2+x_3=t\}$ be the set of \emph{satisfying} tuples of type $t$; they use only the
+colours $0,1,2$. The \emph{completeness} of $I_t$ is
 \[
-  C_t = \min\{V_t(x,\yc) : x\in\{0,1,2\}^3,\ x_1+x_2+x_3\equiv t \pmod 3\}.
+  C_t = \min\{V_t(x,\yc) : x\in\sat_t\}.
 \]
-Note that the satisfying tuples are coloured with the colours $0,1,2$ only.
 
 \paragraph{The reduction.}
 Given a role-separated $\Phi$ and a family, the graph $J=J(\Phi)$ (\cref{fig:reduction}) has a vertex for every variable of
@@ -310,7 +320,14 @@ since the auxiliary vertices of different copies are disjoint.
 \begin{figure}[t]
 \centering
 \input{figures/reduction}
-\caption{REDUCTIONCAPTION}
+\caption{The graph $J(\Phi)$ for a balanced role-separated instance $\Phi$ with three equations of
+weight $\frac13$, one of each type. Each variable is a single vertex, shared by the equations that contain
+it ($u_1$, $w_2$ and $w_3$ occur twice). Each equation $e$ contributes a copy of $I_{t_e}$ scaled by
+$\lambda_e$ (box) with new auxiliary vertices (small circles, schematic); its primaries $p_1,p_2,p_3$
+(labelled on the top copy) are identified with $u_e,w_e,w'_e$ and its globals with the shared vertices
+$g_0,\dots,g_{k-1}$ (dashed line, drawn behind the boxes), so different copies meet only in variable
+vertices and globals. \Cref{sec:S} decodes a colouring $\chi$ into the assignment $u\mapsto a(\chi(u))$ on
+$U$, $w\mapsto b(\chi(w))$ on $W$, for arbitrary maps $a,b\colon[k]\to\Z_3$.}
 \label{fig:reduction}
 \end{figure}
 
@@ -324,7 +341,14 @@ exactly two of them are equal (\cref{fig:tuples}).
 \begin{figure}[t]
 \centering
 \input{figures/tuples}
-\caption{TUPLESCAPTION}
+\caption{The $27$ tuples $x=x_1x_2x_3\in\Z_3^3$, grouped by $s(x)=x_1+x_2+x_3$ into the classes
+$\mathcal A$, $\mathcal D$, $\mathcal T_1$, $\mathcal T_2$; the tuples with $s(x)=t$ form $\sat_t$, so
+$\sat_0=\mathcal A\cup\mathcal D$, $\sat_1=\mathcal T_1$ and $\sat_2=\mathcal T_2$. Negation $x\mapsto-x$
+maps $\mathcal A$ and $\mathcal D$ to themselves (on $\mathcal D$ it exchanges the two columns) and maps
+each tuple of $\mathcal T_1$ to the tuple of $\mathcal T_2$ at the same position (e.g.\ $121\mapsto212$).
+The bottom rows give the gadget values of \cref{lem:EN}, with the larger value of each gadget shaded:
+$V_E$ is larger exactly on $\sat_0$, and $V_N$ exactly on $\sat_1\cup\sat_2$, so $N$ cannot tell
+$\mathcal T_1$ from $\mathcal T_2$.}
 \label{fig:tuples}
 \end{figure}
 
@@ -348,7 +372,13 @@ one auxiliary vertex $q$ joined to $p_1,p_2,p_3$ by edges of weight $3$ (total w
 \begin{figure}[t]
 \centering
 \input{figures/gadgets}
-\caption{GADGETSCAPTION}
+\caption{Left: the gadgets of \cref{thm:main3}; right: their extensions for \MC{k} with $k=3+L$
+(\cref{sec:family}), drawn for $L=2$. Thin edges have weight~$1$ and very thick edges weight~$3$; primaries
+are grey, universal vertices are squares, and edges at universal vertices are blue. (a)~The type-$0$
+gadget $E$ of~\cite{NRT25}, whose auxiliary vertices form the $6$-cycle $a_1a_4a_5a_2a_3a_6$; (b)~the
+gadget $N$ for types $1$ and~$2$; (c)~$A_L$ adds an edge of weight~$1$ from every $a_j$ to every $z_i$
+(none from the primaries) and one of weight~$3$ between any two $z_i$; (d)~$N_L$ adds edges of weight~$3$
+from every $z_i$ to $q$ and to every primary, and none between the $z_i$.}
 \label{fig:gadgets}
 \end{figure}
 
@@ -555,7 +585,7 @@ $k=3$ it is never worse than the per-type analysis of~\cite{NRT25} (\cref{rem:pe
 \section{A uniform family for Max-(3+L)-Cut}\label{sec:family}
 
 Let $L\ge 0$ and $k=3+L$. Call the global vertices $g_3,\dots,g_{k-1}$ (colours $3,\dots,k-1$ in $\yc$)
-the \emph{universal} vertices $z_1,\dots,z_L$; the globals $g_0,g_1,g_2$ are not used (\cref{fig:gadgets}).
+the \emph{universal} vertices $z_1,\dots,z_L$; the globals $g_0,g_1,g_2$ are not used (\cref{fig:gadgets}(c),(d)).
 
 \begin{itemize}
 \item $A_L$: the E-gadget of \cref{sec:three} (unit weights), plus an edge of weight $1$ between every
@@ -724,7 +754,15 @@ masses all three types end at the same value, $\frac{11}{29}+\frac{18}{29}\cdot\
 \begin{figure}[t]
 \centering
 \input{figures/barrier}
-\caption{BARRIERCAPTION}
+\caption{The distribution $\mu^\ast$ of the proof of \cref{thm:barrier}. Top: one dot per tuple, at the
+positions of \cref{fig:tuples}, with area proportional to its mass ($\tfrac5{87}$ on each tuple of
+$\mathcal A$, $\tfrac1{29}$ on every other tuple); the class masses are above the boxes. Row $t$: the
+shaded cells form $\sat_t$, on which $V_t(x,\yc)\ge C_t$; each other cell gives the probability that $x_r$
+lies in that class, for $r\sim\nu$ from the type-$t$ certificate of \cref{lem:dual}. These are exactly the
+conditional probabilities of the classes under $\mu^\ast$, given that $x$ is unsatisfying for type $t$.
+Right: the resulting lower bound on $\mathbb E_{\mu^\ast}V_t/C_t$, namely $\mu^\ast(\sat_t)$ plus the
+unsatisfying mass times the certificate's guarantee $\sum_x\theta(x)$ (\cref{tab:certs}); it is
+$\tfrac{27}{29}$ for every type.}
 \label{fig:barrier}
 \end{figure}
 
@@ -733,7 +771,7 @@ The bounds on the unsatisfying tuples are instances of weak LP duality.
 
 \begin{lemma}\label{lem:dual}
 Fix $t$ and let $\mathcal F_t=[3]^{\sat_t}$ be the set of \emph{columns} (functions from
-$\sat_t=\{x\in\Z_3^3:s(x)=t\}$ to colours). Suppose $\theta\colon\sat_t\to\R_{\ge0}$ and a probability
+$\sat_t$ to colours). Suppose $\theta\colon\sat_t\to\R_{\ge0}$ and a probability
 distribution $\nu$ over pairs $r=(x_r,\chi_r)$, with $x_r\in\Z_3^3$ and $\chi_r$ a colouring of the
 \emph{universe} $\Omega=\{p_1,p_2,p_3,g_0,g_1,g_2\}\cup\mathcal F_t$ with $\chi_r(p_j)=(x_r)_j$ and
 $\chi_r(g_i)=i$, satisfy, for every pair $\{\xi,\eta\}\subseteq\Omega$,
