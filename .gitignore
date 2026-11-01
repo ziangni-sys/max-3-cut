@@ -8,3 +8,4 @@ paper/*.fls
 paper/*.out
 paper/*.blg
 paper/*.toc
+paper/arxiv.tar.gz
