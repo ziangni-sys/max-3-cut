@@ -9,3 +9,5 @@ paper/*.out
 paper/*.blg
 paper/*.toc
 paper/arxiv.tar.gz
+# talk materials (slides and script for the STOC video) are kept out of the public repository for now
+talk/
