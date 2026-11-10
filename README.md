@@ -249,6 +249,7 @@ automorphisms of every gadget.
 * `results/barrier_k3/` — k = 3 barrier certificates and their exhaustive checkers (`check_exact.py`: exact)
 * `paper/` — LaTeX draft of the paper (`main.tex`, `refs.bib`); `scripts/make_unified_family.py` builds
   the paper's family (2A_L, N_L, N_L) for MAX-(3+L)-CUT (`results/unified_L*.json`)
+* `talk/` — slides of the talk about the paper (Beamer; `talk/slides.pdf`, build with `talk/build.sh`)
 * `gadgets/symlp.py` — `SymDynLP(k, i, ...)` also accepts a set of residues `i` (predicate "sum ∈ i")
 * `results/*.json` — gadget families (NRT edge-list format, 1-indexed)
 
@@ -313,4 +314,5 @@ How it was certified (`scripts/verify_a4.py`):
 
 The code and data in this repository are released under the MIT License (`LICENSE`). The paper in `paper/`
 (`main.tex`, `refs.bib`, `main.pdf`) is licensed under the Creative Commons Attribution 4.0 International
-License, CC BY 4.0 (`paper/LICENSE`).
+License, CC BY 4.0 (`paper/LICENSE`). The slides in `talk/` are derived from the paper and are under the same
+CC BY 4.0 licence.

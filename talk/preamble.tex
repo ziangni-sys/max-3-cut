@@ -1,0 +1,50 @@
+% Shared preamble of the talk (Beamer, 16:9).  Compile slides.tex with pdflatex from this directory.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,calc,positioning,fit,backgrounds}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ---------- look ----------
+\usetheme{default}
+\usefonttheme[onlymath]{serif}
+\definecolor{acc}{RGB}{0,0,153}        % = blue!60!black, the accent colour of the paper's figures
+\definecolor{warn}{RGB}{170,40,30}     % used sparingly: NO case, cheating, uncut edges
+\definecolor{soft}{gray}{0.45}         % secondary text
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=9mm,text margin right=9mm}
+\setbeamercolor{frametitle}{fg=acc}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamertemplate{frametitle}{\vspace{2.2mm}\insertframetitle\par\vspace{-1.2mm}{\color{acc!35}\rule{\linewidth}{0.6pt}}}
+\setbeamercolor{structure}{fg=acc}
+\setbeamercolor{alerted text}{fg=warn}
+\setbeamertemplate{itemize items}{\raisebox{0.25ex}{\tiny$\blacksquare$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.2ex}{\tiny$\blacktriangleright$}}
+\setbeamercolor{block title}{bg=acc!14,fg=acc!90!black}
+\setbeamercolor{block body}{bg=acc!5}
+\setbeamerfont{block title}{series=\bfseries,size=\normalsize}
+\setbeamercolor{block title alerted}{bg=warn!14,fg=warn!90!black}
+\setbeamercolor{block body alerted}{bg=warn!5}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{footline}{\hfill{\color{soft}\scriptsize\insertframenumber\,/\,\inserttotalframenumber}\hspace{4mm}\vspace{2.5mm}}
+
+% ---------- macros (same as in the paper) ----------
+\newcommand{\MC}[1]{\textup{\textsc{Max-$#1$-Cut}}}
+\newcommand{\lin}{\textup{\textsc{3Lin}}(\mathbb{Z}_3)}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\sat}{\mathrm{sat}}
+\newcommand{\cut}{\mathrm{cut}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\yc}{y^{\circ}}
+% ---------- talk helpers ----------
+\newcommand{\hl}[1]{{\color{acc}\textbf{#1}}}          % highlight (ours / key point)
+\newcommand{\bad}[1]{{\color{warn}#1}}                  % negative / cheating / NO case
+\newcommand{\src}[1]{{\color{soft}\footnotesize[#1]}}   % citation tag, e.g. \src{AOTW14}
+\newcommand{\paperref}[1]{{\color{soft}\footnotesize(#1)}} % pointer into the paper, e.g. \paperref{Theorem 1.1}

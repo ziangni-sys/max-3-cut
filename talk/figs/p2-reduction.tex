@@ -1,0 +1,56 @@
+% Frame 8: schematic of the reduction, adapted from the paper's Figure 2 (paper/figures/reduction.tex).
+% Same instance as in the paper: U = {u_1,u_2}, W = {w_1,...,w_4}, three equations
+%   u_1+w_1+w_2=0,  u_1+w_2+w_3=1,  u_2+w_3+w_4=2   (one of each type),
+% each replaced by a copy of the gadget I_t (box; new auxiliary vertices inside, schematic) whose three
+% primaries are identified with the three variable vertices of the equation (grey legs).
+% Simplified for the slide: larger labels; the row of global vertices, the labels p_1,p_2,p_3 and the
+% "decoded by a / b" labels of the paper's figure are dropped.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  prim/.style={circle,draw,fill=black!15,inner sep=0.5pt,minimum size=17pt,font=\small,line width=0.5pt},
+  aux/.style={circle,draw,fill=white,inner sep=0pt,minimum size=5.6pt,line width=0.45pt},
+  gad/.style={draw=acc!55,fill=acc!5,rounded corners=4pt,line width=0.6pt,
+              minimum width=4.9cm,minimum height=0.82cm,inner sep=0pt},
+  leg/.style={line width=0.6pt,black!55},
+  gname/.style={font=\small,inner sep=1pt,text=acc!90!black},
+  eqn/.style={font=\small,inner sep=1pt,anchor=west},
+  clab/.style={font=\normalsize,text=black!70,inner sep=1pt},
+  note/.style={font=\footnotesize,text=soft,inner sep=1.5pt},
+  ptr/.style={-{Stealth[length=3.5pt,width=3pt]},line width=0.4pt,soft}]
+\def\xu{0}\def\xw{8.4}\def\bx{4.2}% U column, W column, centre of the gadget copies
+% ---------------------------------------------------------------- variables (one vertex each)
+\node[prim] (u1) at (\xu,2.30) {$u_1$};
+\node[prim] (u2) at (\xu,0.575) {$u_2$};
+\node[prim] (w1) at (\xw,3.45) {$w_1$};
+\node[prim] (w2) at (\xw,2.30) {$w_2$};
+\node[prim] (w3) at (\xw,1.15) {$w_3$};
+\node[prim] (w4) at (\xw,0.00) {$w_4$};
+% ---------------------------------------------------------------- gadget copies
+\foreach \n/\y/\t/\eq in {0/2.875/0/{u_1+w_1+w_2=0}, 1/1.725/1/{u_1+w_2+w_3=1}, 2/0.575/2/{u_2+w_3+w_4=2}}{
+  \node[gad] (B\n) at (\bx,\y) {};
+  \node[gname] at ([xshift=0.40cm]B\n.west) {$I_{\t}$};
+  \draw[acc!30,line width=0.4pt]
+    ([xshift=0.76cm,yshift=0.23cm]B\n.west) -- ([xshift=0.76cm,yshift=-0.23cm]B\n.west);
+  \node[eqn] at ([xshift=0.86cm]B\n.west) {$\eq$};
+  \node[aux] (x\n a) at ([xshift=-0.96cm,yshift=0.13cm]B\n.east) {};
+  \node[aux] (x\n b) at ([xshift=-0.62cm,yshift=-0.13cm]B\n.east) {};
+  \node[aux] (x\n c) at ([xshift=-0.28cm,yshift=0.13cm]B\n.east) {};
+  \draw[black!55,line width=0.4pt] (x\n a) -- (x\n b) -- (x\n c) -- (x\n a);}
+% ---------------------------------------------------------------- legs: first variable in U, the other two in W
+\draw[leg] (B0.west) -- (u1);
+\draw[leg] (B1.west) -- (u1);
+\draw[leg] (B2.west) -- (u2);
+\draw[leg] ([yshift=0.18cm]B0.east) -- (w1);
+\draw[leg] ([yshift=-0.18cm]B0.east) -- (w2);
+\draw[leg] ([yshift=0.18cm]B1.east) -- (w2);
+\draw[leg] ([yshift=-0.18cm]B1.east) -- (w3);
+\draw[leg] ([yshift=0.18cm]B2.east) -- (w3);
+\draw[leg] ([yshift=-0.18cm]B2.east) -- (w4);
+% ---------------------------------------------------------------- column labels
+\node[clab,anchor=base] at (\xu,3.98) {$U$};
+\node[clab,anchor=base] at (\xw,3.98) {$W$};
+% ---------------------------------------------------------------- annotations
+\node[note,anchor=base] (lg) at (\bx-1.25,3.98) {gadget $I_t$ for type $t$};
+\draw[ptr] (lg.south) -- ([xshift=-1.25cm,yshift=0.03cm]B0.north);
+\node[note,anchor=base] (la) at ([xshift=-0.62cm]B0.east |- 0,3.98) {auxiliary vertices};
+\draw[ptr] (la.south) -- ([yshift=0.07cm]x0b.north |- x0a.north);
+\end{tikzpicture}

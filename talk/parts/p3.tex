@@ -1,0 +1,138 @@
+% =====================================================================================================
+% PART 3 (frames 10-14): the negation trick and the proof of Theorem 1.1.
+% Sources in the paper: Section 1.2 (paragraph "The negation trick"), Section 3 (Figure 3, Figure 4 (a),(b),
+% Lemma 3.1, proof of Theorem 1.1, Remarks 3.2 and 3.3).
+% Figures: figs/p3-tuples.tex, figs/p3-gadgets-EN.tex, figs/p3-pertype.tex
+% =====================================================================================================
+
+% local helpers of part 3 (names are prefixed with pIII to avoid clashes with other parts)
+\providecommand{\pIIIbox}[1]{\tikz[baseline=(b.base)]\node[draw=acc,line width=0.8pt,fill=acc!5,
+  rounded corners=3pt,inner xsep=9pt,inner ysep=6pt] (b) {#1};}
+\providecommand{\pIIInum}[1]{\tikz[baseline=(n.base)]\node[circle,fill=acc,text=white,font=\bfseries\large,
+  inner sep=0pt,minimum size=8.5mm] (n) {#1};}
+\providecommand{\pIIIto}{\ensuremath{\longrightarrow}}
+% "result chip" of frame 13: a fraction of the total weight; #1 = colour, #2 = fraction
+\providecommand{\pIIIchip}[2]{\tikz[baseline=(c.base)]\node[fill=#1!7,rounded corners=3pt,inner xsep=4pt,
+  inner ysep=3.5pt,align=center] (c) {{\Large\color{#1}$\approx\boldsymbol{#2}$}\\[1.1mm]{\small of the weight}};}
+% three small vertices, exactly two of them with the same colour (fills as on frame 9)
+\providecommand{\pIIItwoeq}{\tikz[baseline=-0.6ex]{\foreach \i/\c in {0/black!35,1/black!35,2/acc}
+  \node[circle,draw,line width=0.6pt,inner sep=0pt,minimum size=9pt,fill=\c] at (0.4*\i,0) {};}}
+
+% ---- Frame 10: The 27 colour patterns of an equation
+\begin{frame}{The 27 colour patterns of an equation}
+\vspace{0.5mm}
+\centering
+{\small\color{soft}values $x=x_1x_2x_3\in\Z_3^3$ of the three variables;\quad $s=x_1+x_2+x_3$}\par
+\vspace{2.6mm}
+\input{figs/p3-tuples}\par
+\vspace{2.6mm}
+\hl{Negation} $x\mapsto -x$ (swap the values $1$ and $2$):\qquad
+$\mathcal A\to\mathcal A$,\quad $\mathcal D\to\mathcal D$,\quad
+{\color{acc}$\boldsymbol{\mathcal T_1\leftrightarrow\mathcal T_2}$}
+\end{frame}
+
+% ---- Frame 11: The negation trick
+\begin{frame}{The negation trick}
+\vspace{-0.5mm}
+\begin{block}{Observation}
+If $X$ is an assignment, so is $-X$, and\\[1.2mm]
+\centerline{$-X$ satisfies\ \ $x_1+x_2+x_3=t$
+\quad$\Longleftrightarrow$\quad
+$X$ satisfies\ \ $x_1+x_2+x_3=-t$}
+\end{block}
+\pause
+\vspace{1.2mm}
+\bad{\textbf{NO case:}}\ \ every assignment $X$ satisfies a fraction\ \ $\val(X)\le\frac13+\eps$\ \ of the equations.\par
+\vspace{0.6mm}
+Random equation:\ \ $t$ = its type,\ \ $s$ = the sum of its variables under $X$.
+\par\vspace{2mm}
+\centerline{$\Pr[\,s=t\,]\;+\;\Pr[\,s=-t\,]\;\;=\;\;\val(X)+\val(-X)\;\;\le\;\;\tfrac23+2\eps$}
+\pause
+\vspace{2.6mm}
+{\color{acc!35}\rule{\linewidth}{0.5pt}}\par
+\vspace{1.4mm}
+\textbf{Types $t=1$ and $2$:}
+\par\vspace{1.6mm}
+\centerline{``$s=t$ or $s=-t$''
+\ \ $\Longleftrightarrow$\ \ $s\neq0$
+\ \ $\Longleftrightarrow$\ \ \textbf{exactly two values are equal}\ \ \pIIItwoeq}
+\par\vspace{2mm}
+\centerline{\hl{invariant under renaming the colours\ \ \pIIIto\ \ no reference vertices needed}}
+\end{frame}
+
+% ---- Frame 12: Two gadgets
+\begin{frame}{Two gadgets}
+\centering
+\vspace{0.5mm}
+\input{figs/p3-gadgets-EN}\par
+\vspace{3.4mm}
+{\small\color{soft}$s=x_1+x_2+x_3$:\quad
+$s=0$: all equal or all distinct;\quad $s\neq0$: exactly two equal}
+\end{frame}
+
+% ---- Frame 13: Proof of Theorem 1.1 on one slide
+\begin{frame}{Proof of Theorem 1.1 on one slide}
+\vspace{-1mm}
+\textbf{Gadgets:}\ \ \hl{$2E$} for type $0$,\ \ \hl{$N$} for types $1$ and $2$
+\hfill{\small\color{soft}total edge weight: $\tfrac13(36+12+12)=20$}
+\par\vspace{0.6mm}
+\centerline{\begin{tikzpicture}[baseline=(b.base)]
+\node[draw=acc,line width=0.8pt,fill=acc!5,rounded corners=3pt,inner xsep=9pt,inner ysep=5.5pt] (b)
+  {$V_t(x)\;=\;\beta_t+2\,\big([\,s=t\,]+[\,s=-t\,]\big),\qquad \beta_0=32,\ \ \beta_1=\beta_2=9$};
+\node[anchor=south west,font=\footnotesize,text=soft,inner sep=1.5pt] at ([xshift=1.5pt]b.north west)
+  {$V_t(x)$: max cut of the type-$t$ gadget on pattern $x$};
+\end{tikzpicture}}
+\pause
+\par\vspace{2.2mm}
+\begin{minipage}[c]{116mm}\raggedright
+\hl{YES case:}\ \ an assignment that satisfies $\ge1-\eps$ gives a colouring with\par
+\vspace{1.4mm}
+\hspace*{10mm}$\cut\;\ge\;\tfrac13(36+11+11)-O(\eps)\;=\;\tfrac{58}{3}-O(\eps)$
+\end{minipage}\hfill
+\begin{minipage}[c]{25mm}\centering\pIIIchip{acc}{\tfrac{29}{30}}\end{minipage}
+\pause
+\par\vspace{2.2mm}
+\begin{minipage}[c]{116mm}\raggedright
+\bad{\textbf{NO case:}}\ \ any colouring gives an assignment $\sigma$, and\par
+\vspace{1.4mm}
+\hspace*{10mm}$\cut\;\le\;\tfrac{50}{3}+2\,\big(\val(\sigma)+\val(-\sigma)\big)
+\;\le\;\tfrac{50}{3}+\tfrac43+4\eps\;=\;18+4\eps$
+\end{minipage}\hfill
+\begin{minipage}[c]{25mm}\centering\pIIIchip{warn}{\tfrac{9}{10}}\end{minipage}
+\pause
+\par\vspace{2mm}
+\centerline{\pIIIbox{\large\color{acc}$\dfrac{9/10}{29/30}\;=\;\boldsymbol{\dfrac{27}{29}}$}}
+\end{frame}
+
+% ---- Frame 14: Two remarks
+\begin{frame}{Two remarks}
+\vspace{1mm}
+\pIIInum{1}\hspace{3.5mm}%
+\begin{minipage}[t]{128mm}
+{\large\textbf{Judged gadget by gadget, $N$ is useless}}\hfill\paperref{Remark 3.3}\par
+\vspace{2.2mm}
+\begin{minipage}[c]{70mm}\raggedright
+As a type-$1$ gadget, it cannot tell $s=1$ from $s=2$.\par
+\vspace{2mm}
+\hl{The gain comes from the analysis}: pairing $\sigma$ with $-\sigma$.
+\end{minipage}\hfill
+\begin{minipage}[c]{55mm}\centering
+\input{figs/p3-pertype}
+\end{minipage}
+\end{minipage}
+
+\vspace{6mm}
+\pIIInum{2}\hspace{3.5mm}%
+\begin{minipage}[t]{128mm}
+{\large\textbf{The argument is robust}}\hfill\paperref{Remark 3.2}\par
+\vspace{2.2mm}
+\begin{minipage}[c]{70mm}\raggedright
+It needs neither role separation nor, essentially, balance.
+\end{minipage}\hfill
+\begin{minipage}[c]{55mm}\centering
+{\small if type $0$ has weight $\lambda_0$, the ratio is}\par
+\vspace{2.2mm}
+$\dfrac{23\lambda_0+\frac{31}{3}}{25\lambda_0+11}\;\le\;\dfrac{31}{33}\;<\;\dfrac{16}{17}$
+\end{minipage}
+\end{minipage}
+\end{frame}

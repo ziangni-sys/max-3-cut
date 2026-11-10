@@ -1,0 +1,20 @@
+% Frame 14, remark (1): the row "V_N" of the paper's Figure 3 (../paper/figures/tuples.tex), values of
+% Lemma 3.1: V_N = 9 on A and D, V_N = 11 on T_1 and on T_2 (larger value shaded, as in the paper).
+% Cell geometry in x-units as in the paper: A=[0,1], D=[1.75,3.75], T_1=[4.5,7.5], T_2=[8.25,11.25].
+\begin{tikzpicture}[x=0.42cm,y=1cm,
+  cell/.style={draw=black!45,line width=0.5pt},
+  hi/.style={cell,fill=black!12},
+  val/.style={font=\normalsize},
+  cname/.style={font=\normalsize,inner sep=1pt,text height=1.6ex,text depth=0.5ex},
+  rlab/.style={font=\normalsize,anchor=east,inner sep=1pt},
+  note/.style={font=\footnotesize,inner sep=1pt,text height=1.6ex,text depth=0.5ex},
+  brc/.style={decorate,decoration={brace,amplitude=4pt,mirror},line width=0.5pt,acc}]
+\foreach \c/\n in {0.5/{\mathcal A}, 2.75/{\mathcal D}, 6/{\mathcal T_1}, 9.75/{\mathcal T_2}}
+  \node[cname] at (\c,0.88) {$\n$};
+\node[rlab] at (-0.35,0.3) {$V_N$};
+\foreach \l/\r/\v/\s in {0/1/9/cell, 1.75/3.75/9/cell, 4.5/7.5/11/hi, 8.25/11.25/11/hi}
+  \draw[\s] (\l,0.6) rectangle node[val] {$\v$} (\r,0);
+\node[note] at (6,-0.27)    {$s=1$};
+\node[note] at (9.75,-0.27) {$s=2$};
+\draw[brc] (4.5,-0.52) -- node[below=4.5pt,font=\footnotesize,text=acc,inner sep=1pt] {same value} (11.25,-0.52);
+\end{tikzpicture}

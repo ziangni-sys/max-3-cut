@@ -1,0 +1,154 @@
+% =====================================================================================================
+% PART 5 (frames 19-23): the barrier, how the results were obtained, open problems, summary.
+% Sources in the paper: Section 1.2 (paragraphs "A barrier", "How these results were obtained"),
+% Section 7 (Theorem 7.1, the distribution mu*, Lemma 7.2, Table 2, Figure 5), Section 8,
+% Appendix B and the AI methodology statement.
+% Figures: figs/p5-barrier.tex
+% Citation tags are the alpha labels of the paper's bibliography: [TSSW00], [HHM+17], [Cha16], [AOTW14].
+% =====================================================================================================
+
+% local helpers of part 5 (names are prefixed with pV to avoid clashes with other parts)
+\providecommand{\pVnum}[1]{\tikz[baseline=(n.base)]\node[circle,fill=acc,text=white,font=\bfseries\large,
+  inner sep=0pt,minimum size=8.5mm] (n) {#1};}
+\providecommand{\pVto}{\ensuremath{\longrightarrow}}
+\providecommand{\pVimp}{{\color{acc}$\boldsymbol{\Longrightarrow}$}}
+% small swatch of a cell of the figure of frame 20; #1 = fill colour
+\providecommand{\pVswatch}[1]{\tikz[baseline=-0.6ex]\draw[draw=black!45,line width=0.5pt,fill=#1]
+  (-2.2mm,-1.3mm) rectangle (2.2mm,1.3mm);}
+
+% ---- Frame 19: A barrier at 27/29
+\begin{frame}{A barrier at $27/29$}
+\vspace{-0.5mm}
+\begin{block}{Theorem 7.1\ \ (computer-assisted)}
+For \textbf{every} family $(I_0,I_1,I_2)$ of \MC{3} gadgets ---
+any number of auxiliary vertices,\\ with or without global vertices:
+\par\vspace{0.6mm}
+\hspace*{5mm}%
+\mbox{\Large$\displaystyle\max_{x\in\Z_3^3}\,S_{\yc}(x)\;\;\ge\;\;
+  {\color{acc}\boldsymbol{\frac{27}{29}}}\,\sum_{t}C_t$}%
+\hfill
+\begin{minipage}[c]{71mm}\small\color{soft}\raggedright
+$S_{\yc}(x)=\sum_tV_t(x,\yc)$:\ \ all three gadgets\par\vspace{0.2mm}
+on one colour pattern $x$, with canonical globals\par\vspace{1mm}
+$C_t$:\ \ completeness of the type-$t$ gadget\par\vspace{0.2mm}
+\hphantom{$C_t$:\ \ }(its least value on satisfying colourings)
+\end{minipage}
+\vspace{-0.6mm}
+\end{block}
+\vspace{2.6mm}
+\begin{minipage}[c]{11mm}\pVimp\end{minipage}%
+\begin{minipage}[c]{130mm}\large\raggedright
+For \MC{3}, the criterion cannot give a factor below $27/29$:\par\vspace{0.5mm}
+\hl{the simple gadgets $E$ and $N$ are optimal}
+\end{minipage}
+\par\vspace{3.1mm}
+\begin{minipage}[c]{11mm}\pVimp\end{minipage}%
+\begin{minipage}[c]{130mm}\large\raggedright
+With tightness \paperref{Proposition 4.3}: $27/29$ is \hl{the limit for gadget reductions}\par\vspace{0.5mm}
+from H\aa stad's equations that use his theorem as a black box
+\end{minipage}
+\par\vspace{3.1mm}
+\hspace*{11mm}{\color{soft}Proof: LP duality, in the spirit of} \src{TSSW00, HHM$^{+}$17}
+\end{frame}
+
+% ---- Frame 20: The proof: one distribution that is bad for every gadget
+\begin{frame}{The proof: one distribution that is bad for every gadget}
+\vspace{-0.3mm}
+\centerline{\input{figs/p5-barrier}}
+\par\vspace{1.3mm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.2\textwidth}
+\pVswatch{black!12}\ \textbf{Shaded cells}\par\vspace{1.2mm}
+$V_t\ge C_t$ on $\sat_t$,\\ by definition
+\end{column}
+\begin{column}{0.4pt}\color{acc!25}\rule{0.4pt}{19.5mm}\end{column}
+\begin{column}{0.408\textwidth}
+\pVswatch{white}\ \textbf{Other cells}\ \ ($\mu^\ast$ given $x\notin\sat_t$)\par\vspace{1.2mm}
+an \hl{LP-dual certificate} guarantees,\\ on average,
+${\color{acc}\boldsymbol{\tfrac89}}\,C_0$ (type $0$) and\\
+${\color{acc}\boldsymbol{\tfrac9{10}}}\,C_t$ (types $1,2$)\hfill\paperref{Lemma 7.2}
+\end{column}
+\begin{column}{0.4pt}\color{acc!25}\rule{0.4pt}{19.5mm}\end{column}
+\begin{column}{0.345\textwidth}
+\textbf{Exact rational certificates}\par\vspace{1.2mm}
+$78$, $162$, $162$ rows;\ \ verified in\\ exact arithmetic by\\
+\hl{two independent programs}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---- Frame 21: How these results were obtained
+\begin{frame}{How these results were obtained}
+\vspace{-1mm}
+This research was carried out with \hl{extensive use of an AI system} (Claude, Anthropic),\\
+under the direction of the author.
+\hfill{\small\color{soft}Details: Appendix B and the AI methodology statement}
+\par\vspace{1.2mm}
+\setlength{\leftmargini}{5mm}%
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.345\textwidth}
+\begin{block}{The AI system}
+\begin{itemize}\setlength{\itemsep}{4.2mm}
+\item proposed the main ideas
+\item wrote and ran the search and verification programs
+\item searched the literature
+\item drafted the paper
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.61\textwidth}
+\begin{block}{How the claims were checked}
+\begin{itemize}\setlength{\itemsep}{1.7mm}
+\item \hl{Independent AI agents} tried to refute every main claim:
+  {\small\color{soft}re-read the primary sources, re-derived the proofs,
+  re-implemented the computations}
+\item Every gadget value and certificate: verified by\\
+  \hl{$\ge2$ independent programs}, in exact arithmetic
+\item Theorems 1.1--1.3 have \hl{short proofs by hand};\\ only Theorem 7.1 is computer-assisted
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\par\vspace{4.6mm}
+\vspace{-2.4mm}\hl{The author verified all content} and is responsible for it.\par\vspace{0.4mm}
+Code, gadget families, certificates:\ \
+\href{https://github.com/ziangni-sys/max-3-cut}{\color{acc}\texttt{github.com/ziangni-sys/max-3-cut}}
+\end{frame}
+
+% ---- Frame 22: Open problems
+\begin{frame}{Open problems}
+\vspace{0.6mm}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}m{12mm}@{\hspace{2mm}}m{127mm}@{}}
+\pVnum{1} & {\large\textbf{Perfect completeness.}\ \ Beat $16/17$ \src{AOTW14} on $3$-colourable graphs?}\\[0.3mm]
+          & {\small\color{soft}combine the negation trick with a source that has perfect completeness}\\[2.5mm]
+\pVnum{2} & {\large\textbf{Other sources.}\ \ Below $27/29$: change the source, reduction, or analysis}\\[0.3mm]
+          & {\small\color{soft}candidates: Chan's predicates \src{Cha16}, where the negation trick applies as well}\\[2.5mm]
+\pVnum{3} & {\large\textbf{$\boldsymbol{k\ge4}$.}\ \ Are $45/47$ and $33/34$ optimal for the criterion?}\\[0.3mm]
+          & {\small\color{soft}so far, no barrier certificate}\\[2.5mm]
+\pVnum{4} & {\large\textbf{Large $\boldsymbol k$.}\ \ Can the criterion improve the constant in $1-\Theta(1/k)$?}\\[0.3mm]
+          & {\small\color{soft}the family of this paper gives only $1-\Theta(1/k^2)$}
+\end{tabular}
+\par\vspace{3.2mm}
+{\small\color{soft}\dots\ and $k=3$:}\ \ $0.836$
+{\small\color{soft}(optimal under the Unique Games Conjecture)}\ \ vs.\ \ $0.931$ {\small\color{soft}(NP-hard)}
+\end{frame}
+
+% ---- Frame 23: Summary
+\begin{frame}{Summary}
+\vspace{3mm}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}m{6mm}@{}m{135mm}@{}}
+{\color{acc}\rule{1mm}{11.5mm}} & {\Large \MC{3} is NP-hard to approximate within
+   \hl{$\mathbf{27/29}+\eps\approx0.931$}}\par\vspace{1.4mm}
+   {\color{soft}was $16/17\approx0.941$ since 2012 \src{AOTW14}}\\[8mm]
+{\color{acc}\rule{1mm}{11.5mm}} & {\Large \hl{Negation trick}: pair every assignment $X$ with $-X$}\par\vspace{1.4mm}
+   {\color{soft}\pVto\ \ colour-symmetric predicates, tiny gadgets}\\[8mm]
+{\color{acc}\rule{1mm}{11.5mm}} & {\Large A tight \hl{soundness criterion}, and a matching \hl{barrier} at $27/29$}\par\vspace{1.4mm}
+   {\color{soft}\pVto\ \ more colours; with Theorem 1.3: better bounds for every $k$ from $3$ to $20$}
+\end{tabular}
+\par\vspace{9mm}
+{\LARGE\color{acc}\textbf{Thank you!}}\hfill
+{\color{soft}code and certificates:}\ \
+\href{https://github.com/ziangni-sys/max-3-cut}{\color{acc}\texttt{github.com/ziangni-sys/max-3-cut}}
+\end{frame}

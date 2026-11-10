@@ -1,0 +1,69 @@
+% Frame 20: the distribution mu* of the barrier (Theorem 7.1) on the classes A, D, T_1, T_2.
+% Adapted from ../paper/figures/barrier.tex (Figure 5 of the paper).  Mathematical content unchanged:
+% same boxes (x-units as in the paper: A=[0,1], D=[1.75,3.75], T_1=[4.5,7.5], T_2=[8.25,11.25]), one dot
+% per tuple at the same positions with area proportional to its mu*-mass (5/87 on A, 1/29 = 3/87
+% elsewhere, radii in the ratio sqrt(5/3) as in the paper), same class masses, same cells (sat_t shaded;
+% conditional probabilities 9/18, 9/18 and 5/20, 6/20, 9/20), same right-hand column.
+% Changes for the slide (layout only): larger fonts (the fractions in the cells are scaled by 1.15),
+% x-unit 0.82cm, lower boxes and taller cells; the mass label of the narrow box A is moved 2.4mm to the
+% left; in the right-hand column the certificate's guarantee (8/9, 9/10) is set in the accent colour and
+% the result 27/29 in bold; the description of mu* (Section 7 of the paper: uniform within each class,
+% class masses 5:6:9:9) is added at the top right.
+% The legend of the cells (caption of Figure 5) is given by the three text zones under the figure on
+% the slide.  The data lines of the \foreach lists below were compared with the paper's file by a script.
+\begingroup
+\def\pVrh{0.32}\def\pVbt{1.16}% row height of the dots; top of the boxes (3*0.32 + 2*0.1)
+\def\pVra{1.3mm}%      dot radius on A (mass 5/87)
+\def\pVrb{1.00698mm}% dot radius elsewhere (mass 1/29 = 3/87) = 1.3mm*sqrt(3/5); area ratio 5:3
+\def\pVch{0.6}\def\pVcp{0.69}% height and pitch of the cells
+\begin{tikzpicture}[x=0.82cm,y=1cm,
+  cls/.style={draw,rounded corners=2.5pt,line width=0.7pt,fill=black!3},
+  cname/.style={font=\Large,inner sep=1pt,text height=1.7ex,text depth=0.5ex},
+  cmass/.style={font=\normalsize,inner sep=1pt},
+  rlab/.style={font=\normalsize,anchor=east,inner sep=1pt},
+  cell/.style={draw=black!45,line width=0.5pt},
+  hi/.style={cell,fill=black!12},
+  val/.style={font=\normalsize,scale=1.15},
+  satv/.style={font=\normalsize},
+  bnd/.style={font=\normalsize,anchor=west,inner sep=1pt,scale=1.12}]
+% ---------------------------------------------------------------- boxes and dots
+\foreach \l/\r in {0/1, 1.75/3.75, 4.5/7.5, 8.25/11.25}
+  \draw[cls] (\l,0) rectangle (\r,\pVbt);
+\foreach \i in {0,1,2}{
+  \fill[black!60] (0.5,\pVbt-0.1-\i*\pVrh-0.5*\pVrh) circle[radius=\pVra];
+  \foreach \x in {2.25,3.25,5,6,7,8.75,9.75,10.75}
+    \fill[black!60] (\x,\pVbt-0.1-\i*\pVrh-0.5*\pVrh) circle[radius=\pVrb];}
+\node[rlab] at (-0.25,0.5*\pVbt) {$\mu^\ast$};
+% ---------------------------------------------------------------- headers
+\foreach \c/\n/\m in {0.5/{\mathcal A}/{\tfrac{5}{29}=3\cdot\tfrac{5}{87}},
+                      2.75/{\mathcal D}/{\tfrac{6}{29}=6\cdot\tfrac{1}{29}},
+                      6/{\mathcal T_1}/{\tfrac{9}{29}=9\cdot\tfrac{1}{29}},
+                      9.75/{\mathcal T_2}/{\tfrac{9}{29}=9\cdot\tfrac{1}{29}}}{
+  \node[cname] at (\c,\pVbt+0.75) {$\n$};
+  \ifdim\c pt<1pt% the label of the narrow box A is moved 2.4mm to the left, away from the label of D
+    \node[cmass,xshift=-2.4mm] at (\c,\pVbt+0.29) {$\m$};
+  \else
+    \node[cmass] at (\c,\pVbt+0.29) {$\m$};
+  \fi}
+% ---------------------------------------------------------------- description of mu* (top right)
+\node[anchor=north west,font=\normalsize,inner sep=1pt,align=left] at (11.55,\pVbt+0.96)
+  {$\mu^\ast$: \textbf{uniform} within\\[0.3mm]each class, masses\\[1.1mm]\hspace*{4mm}{\large$\mathbf{5:6:9:9}$}};
+% ---------------------------------------------------------------- certificate grid
+\node[font=\normalsize,anchor=south west,inner sep=1pt] at (11.55,-0.17) {$\mathbb{E}_{\mu^\ast}V_t\,/\,C_t\ \ge$};
+\foreach \t/\a/\d/\p/\q/\bd in {
+   0/sat/sat/{\tfrac{9}{18}}/{\tfrac{9}{18}}/{\tfrac{11}{29}+\tfrac{18}{29}\cdot{\color{acc}\boldsymbol{\tfrac{8}{9}}}=\boldsymbol{\tfrac{27}{29}}},
+   1/{\tfrac{5}{20}}/{\tfrac{6}{20}}/sat/{\tfrac{9}{20}}/{\tfrac{9}{29}+\tfrac{20}{29}\cdot{\color{acc}\boldsymbol{\tfrac{9}{10}}}=\boldsymbol{\tfrac{27}{29}}},
+   2/{\tfrac{5}{20}}/{\tfrac{6}{20}}/{\tfrac{9}{20}}/sat/{\tfrac{9}{29}+\tfrac{20}{29}\cdot{\color{acc}\boldsymbol{\tfrac{9}{10}}}=\boldsymbol{\tfrac{27}{29}}}}{
+  \pgfmathsetmacro\yt{-0.23-\t*\pVcp}
+  \pgfmathsetmacro\yb{\yt-\pVch}
+  \node[rlab] at (-0.25,{(\yt+\yb)/2}) {$t=\t$};
+  \foreach \l/\r/\v in {0/1/\a, 1.75/3.75/\d, 4.5/7.5/\p, 8.25/11.25/\q}{
+    \edef\tmp{\v}\def\satstr{sat}%
+    \ifx\tmp\satstr
+      \draw[hi] (\l,\yt) rectangle node[satv] {$\sat_{\t}$} (\r,\yb);
+    \else
+      \draw[cell] (\l,\yt) rectangle node[val] {$\v$} (\r,\yb);
+    \fi}
+  \node[bnd] at (11.55,{(\yt+\yb)/2}) {$\bd$};}
+\end{tikzpicture}
+\endgroup

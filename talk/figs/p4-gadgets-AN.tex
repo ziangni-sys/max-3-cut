@@ -1,0 +1,116 @@
+% Frame 17: the gadgets A_L (top) and N_L (bottom), drawn for L = 2 = panels (c) and (d) of the paper's
+% Figure 4 (../paper/figures/gadgets.tex), with EXACTLY the same edges and weights.  The coordinates of the
+% two panels are those of the paper's figure; each panel is only scaled as a whole (x=..,y=.. of its
+% scope), the vertex labels are larger, and the panel captions are replaced by slide text at the left
+% (names, types, a legend of the two edge weights; the two legend strokes are not edges of a gadget).
+% Every edge is drawn explicitly, one \draw per edge (the edge list is extracted from these lines and
+% compared with the definitions in Section 5 of the paper).
+% Edge styles: e1, e1p, u1 = weight 1;  e3, u3 = weight 3;  u1, u3 = edges at universal vertices z_i.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  prim/.style={circle,draw,line width=0.5pt,fill=black!15,inner sep=0pt,minimum size=13pt,font=\footnotesize},
+  aux/.style={circle,draw,line width=0.5pt,fill=white,inner sep=0pt,minimum size=12.5pt,font=\scriptsize},
+  univ/.style={rectangle,draw,line width=0.5pt,fill=black!5,inner sep=0pt,minimum size=12.5pt,font=\scriptsize},
+  e1/.style={line width=0.5pt},
+  e1p/.style={line width=0.5pt,black!60},
+  e3/.style={line width=1.6pt},
+  u1/.style={line width=0.5pt,acc},
+  u3/.style={line width=1.6pt,acc},
+  gname/.style={font=\Large,text=acc,inner sep=0pt,anchor=base west},
+  gsub/.style={font=\small,inner sep=0pt,anchor=base west},
+  gnote/.style={font=\footnotesize,inner sep=0pt,anchor=base west,text=soft}]
+% ================================================================== (c) A_L, L=2
+\begin{scope}[shift={(4.72,0)},x=0.69cm,y=0.69cm]
+  \node[aux] (aC1) at (90:1.7) {$a_1$};
+  \node[aux] (aC4) at (30:1.7) {$a_4$};
+  \node[aux] (aC5) at (-30:1.7) {$a_5$};
+  \node[aux] (aC2) at (-90:1.7) {$a_2$};
+  \node[aux] (aC3) at (-150:1.7) {$a_3$};
+  \node[aux] (aC6) at (150:1.7) {$a_6$};
+  \node[prim] (pC1) at (90:0.765) {$p_1$};
+  \node[prim] (pC2) at (-30:0.765) {$p_2$};
+  \node[prim] (pC3) at (210:0.765) {$p_3$};
+  \node[univ] (zC1) at (-3.1,0) {$z_1$};
+  \node[univ] (zC2) at (3.1,0) {$z_2$};
+  % the gadget E, unchanged
+  \draw[e1] (aC1) -- (aC4);
+  \draw[e1] (aC4) -- (aC5);
+  \draw[e1] (aC5) -- (aC2);
+  \draw[e1] (aC2) -- (aC3);
+  \draw[e1] (aC3) -- (aC6);
+  \draw[e1] (aC6) -- (aC1);
+  \draw[e1p] (pC1) -- (aC1);
+  \draw[e1p] (pC1) -- (aC2);
+  \draw[e1p] (pC1) -- (aC3);
+  \draw[e1p] (pC1) -- (aC4);
+  \draw[e1p] (pC2) -- (aC3);
+  \draw[e1p] (pC2) -- (aC4);
+  \draw[e1p] (pC2) -- (aC5);
+  \draw[e1p] (pC2) -- (aC6);
+  \draw[e1p] (pC3) -- (aC1);
+  \draw[e1p] (pC3) -- (aC2);
+  \draw[e1p] (pC3) -- (aC5);
+  \draw[e1p] (pC3) -- (aC6);
+  % z_1, z_2 -- every a_j (weight 1): straight to the nearest two a_j, curved around the cycle to the others
+  \draw[u1] (zC1) -- (aC6);
+  \draw[u1] (zC1) -- (aC3);
+  \draw[u1] (zC2) -- (aC4);
+  \draw[u1] (zC2) -- (aC5);
+  % (curves are kept out of the bounding box, which would otherwise include their control points;
+  %  the \path below adds their true extent)
+  \begin{pgfinterruptboundingbox}
+  \draw[u1] (zC1) .. controls (-2.43,0.74) and (-1.09,1.85) .. (aC1);
+  \draw[u1] (zC1) .. controls (-2.43,-0.74) and (-1.09,-1.85) .. (aC2);
+  \draw[u1] (zC1) .. controls (-2.47,2.52) and (0.37,3.21) .. (aC4);
+  \draw[u1] (zC1) .. controls (-2.47,-2.52) and (0.37,-3.21) .. (aC5);
+  \draw[u1] (zC2) .. controls (2.43,0.74) and (1.09,1.85) .. (aC1);
+  \draw[u1] (zC2) .. controls (2.43,-0.74) and (1.09,-1.85) .. (aC2);
+  \draw[u1] (zC2) .. controls (2.47,2.52) and (-0.37,3.21) .. (aC6);
+  \draw[u1] (zC2) .. controls (2.47,-2.52) and (-0.37,-3.21) .. (aC3);
+  % z_1 -- z_2 (weight 3)
+  \draw[u3] (zC1) .. controls (-3.71,3.47) and (3.71,3.47) .. (zC2);
+  \end{pgfinterruptboundingbox}
+  \path (-3.16,-2.36) rectangle (3.16,2.68);
+\end{scope}
+% slide text of panel (c)
+\node[gname] at (0,1.20) {$A_L$};
+\node[gsub]  at (0,0.66) {type $0$};
+\node[gsub]  at (0,0.18) {$=E+{}$the $z_i$};
+\draw[e3] (0.02,-0.52) -- (0.50,-0.52);
+\node[gnote,anchor=west] at (0.64,-0.52) {weight $3$};
+\draw[e1] (0.02,-0.92) -- (0.50,-0.92);
+\node[gnote,anchor=west] at (0.64,-0.92) {weight $1$};
+% ================================================================== (d) N_L, L=2
+\begin{scope}[shift={(4.72,-2.83)},x=0.74cm,y=0.74cm]
+  \node[prim] (pD1) at (90:1.2) {$p_1$};
+  \node[prim] (pD2) at (-30:1.2) {$p_2$};
+  \node[prim] (pD3) at (210:1.2) {$p_3$};
+  \node[aux] (qD) at (0,0) {$q$};
+  % z_i raised above the height of q, so that z_1--q--z_2 is not a straight line (no edge z_1z_2)
+  \node[univ] (zD1) at (-2.6,0.6) {$z_1$};
+  \node[univ] (zD2) at (2.6,0.6) {$z_2$};
+  % the gadget N, unchanged
+  \draw[e1] (pD1) -- (pD2);
+  \draw[e1] (pD2) -- (pD3);
+  \draw[e1] (pD3) -- (pD1);
+  \draw[e3] (qD) -- (pD1);
+  \draw[e3] (qD) -- (pD2);
+  \draw[e3] (qD) -- (pD3);
+  % z_i -- q and z_i -- every primary (weight 3); no edge z_1 z_2
+  \draw[u3] (zD1) -- (qD);
+  \draw[u3] (zD1) -- (pD1);
+  \draw[u3] (zD1) -- (pD3);
+  \draw[u3] (zD2) -- (qD);
+  \draw[u3] (zD2) -- (pD1);
+  \draw[u3] (zD2) -- (pD2);
+  \begin{pgfinterruptboundingbox}
+  \draw[u3] (zD1) .. controls (-2.4,-1.6) and (-0.15,-1.75) .. (pD2);
+  \draw[u3] (zD2) .. controls (2.4,-1.6) and (0.15,-1.75) .. (pD3);
+  \end{pgfinterruptboundingbox}
+  \path (-2.63,-1.38) rectangle (2.63,0);
+\end{scope}
+% slide text of panel (d)
+\node[gname] at (0,-2.06) {$N_L$};
+\node[gsub]  at (0,-2.60) {types $1$ and $2$};
+\node[gsub]  at (0,-3.08) {$=N+{}$the $z_i$};
+\node[gnote] at (0,-3.62) {drawn for $L=2$};
+\end{tikzpicture}

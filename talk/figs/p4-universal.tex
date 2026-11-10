@@ -1,0 +1,48 @@
+% Frame 18: the universal-vertex reduction of [KKLP97, GS13] (Lemma 6.1 of the paper), schematic, L = 2.
+% A base graph G (blob; a hard instance for 3 colours) and two new vertices z_1, z_2 (squares).
+% Every z_i is joined to every vertex v of G (weight d_v/3, blue fan), and z_1 and z_2 are joined to each
+% other.  The small graph inside the blob is only an illustration (7 vertices, 10 edges, 3-colourable).
+\begin{tikzpicture}[x=1cm,y=1cm,
+  gv/.style={circle,draw,line width=0.5pt,fill=white,inner sep=0pt,minimum size=7.5pt},
+  univ/.style={rectangle,draw,line width=0.6pt,fill=black!5,inner sep=0pt,minimum size=15pt,font=\small},
+  ge/.style={line width=0.55pt},
+  fan/.style={line width=0.45pt,acc!70},
+  zz/.style={line width=1.6pt,acc},
+  note/.style={font=\small,inner sep=0pt,text=acc,align=left,anchor=west},
+  ptr/.style={-{Stealth[length=3.5pt,width=3pt]},line width=0.4pt,acc}]
+% ---------------------------------------------------------------- the base graph G
+\draw[draw=black!45,fill=black!4,line width=0.6pt] (0,0) ellipse [x radius=2.55, y radius=1.0];
+\coordinate (v1) at (-1.92,0.02);
+\coordinate (v2) at (-1.15,0.45);
+\coordinate (v3) at (-1.00,-0.42);
+\coordinate (v4) at (-0.08,0.12);
+\coordinate (v5) at (0.82,0.50);
+\coordinate (v6) at (0.97,-0.40);
+\coordinate (v7) at (1.88,0.05);
+\coordinate (z1) at (-1.80,2.28);
+\coordinate (z2) at (0.10,2.28);
+% ---------------------------------------------------------------- every z_i is joined to every vertex of G
+\foreach \i in {1,...,7}{
+  \draw[fan] (z1) -- (v\i);
+  \draw[fan] (z2) -- (v\i);}
+% ---------------------------------------------------------------- z_1 -- z_2
+\draw[zz] (z1) -- (z2);
+% ---------------------------------------------------------------- edges and vertices of G
+\draw[ge] (v1) -- (v2);
+\draw[ge] (v1) -- (v3);
+\draw[ge] (v2) -- (v3);
+\draw[ge] (v2) -- (v4);
+\draw[ge] (v3) -- (v4);
+\draw[ge] (v4) -- (v5);
+\draw[ge] (v4) -- (v6);
+\draw[ge] (v5) -- (v6);
+\draw[ge] (v5) -- (v7);
+\draw[ge] (v6) -- (v7);
+\foreach \i in {1,...,7}{\node[gv] at (v\i) {};}
+\node[univ] at (z1) {$z_1$};
+\node[univ] at (z2) {$z_2$};
+% ---------------------------------------------------------------- labels
+\node[font=\small,inner sep=0pt,anchor=base] at (0,-1.50) {$G$:\ \ hard instance for $3$ colours};
+\node[note] (lab) at (1.02,2.15) {weight $d_v/3$ to\\[-0.3mm]every vertex $v$};
+\draw[ptr] ([xshift=-1.5pt,yshift=-3pt]lab.west) -- (0.50,1.60);
+\end{tikzpicture}

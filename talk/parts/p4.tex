@@ -1,0 +1,152 @@
+% =====================================================================================================
+% PART 4 (frames 15-18): more colours -- the soundness criterion, why it holds, the family for
+% k = 3 + L colours, universal vertices and perfect completeness.
+% Sources in the paper: Section 1.2 (paragraphs "A soundness criterion", "Universal vertices"),
+% Section 4 (Theorem 4.1, proof idea, Lemma 4.2, Proposition 4.3), Section 5 (the family, Lemma 5.1,
+% proof of Theorem 1.2, Figure 4 (c),(d)), Section 6 (Lemma 6.1, proof of Theorem 1.3, Remark 6.2),
+% Table 1.
+% Figures: figs/p4-decoding.tex, figs/p4-gadgets-AN.tex, figs/p4-universal.tex
+% =====================================================================================================
+
+% local helpers of part 4 (names are prefixed with pIV to avoid clashes with other parts)
+\providecommand{\pIVto}{\ensuremath{\longrightarrow}}
+\providecommand{\pIVbox}[1]{\tikz[baseline=(b.base)]\node[draw=acc,line width=0.8pt,fill=acc!5,
+  rounded corners=3pt,inner xsep=6pt,inner ysep=5.5pt] (b) {#1};}
+
+% ---- Frame 15: More colours: a general soundness criterion
+\begin{frame}{More colours: a general soundness criterion}
+\vspace{-0.5mm}
+$k\ge4$:\ satisfying colourings use only $3$ of the $k$ colours\ \ $\Rightarrow$\ \
+\hl{global vertices} needed again
+\par\vspace{2.4mm}
+\begin{block}{Theorem 4.1\ \ (soundness criterion)}
+Gadgets $I_0,I_1,I_2$ for \MC{k}, one per type
+{\small\color{soft}(each symmetric in the 2nd and 3rd variable)}.\\[0.8mm]
+Then, for every $\delta>0$, \MC{k} is NP-hard to approximate within $\rho+\delta$, where
+\par\vspace{1.4mm}
+\centerline{%
+\begin{tikzpicture}[baseline=(f.base)]
+\node[inner sep=1pt] (f) {\large$\displaystyle\rho\;=\;
+  \frac{{\color{acc}\max\limits_{x,\,y}}\ \sum\limits_{t}V_t(x,y)}{\sum\limits_{t}C_t}$};
+\node[anchor=west,font=\small,text=acc,inner sep=1.5pt,align=left] (n) at ([xshift=13mm,yshift=4.4mm]f.east)
+  {one colour pattern $(x,y)$,\\[-0.4mm]all three gadgets};
+\draw[-{Stealth[length=4pt,width=3.4pt]},line width=0.5pt,acc] (n.west) -- ([xshift=1.5mm,yshift=4.4mm]f.east);
+\end{tikzpicture}}
+\vspace{-1.5mm}
+\end{block}
+\vspace{1.4mm}
+{\small
+\begin{tabular}{@{\hspace{2mm}}r@{\quad}l@{}}
+$V_t(x,y)$ & best cut of the type-$t$ gadget when its variables have colours $x$, the globals colours $y$\\[0.8mm]
+$C_t$ & its least value on satisfying colourings\ \ {\color{soft}(globals coloured canonically)}
+\end{tabular}}
+\par\vspace{3.4mm}
+\centerline{A cheating colouring cannot do better than to use}
+\vspace{0.6mm}
+\centerline{\large\hl{one colour pattern on all equations}}
+\end{frame}
+
+% ---- Frame 16: Why the criterion holds
+\begin{frame}{Why the criterion holds}
+\vspace{-1mm}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.455\textwidth}
+\input{figs/p4-decoding}
+\end{column}
+\begin{column}{0.525\textwidth}
+\begin{itemize}\setlength{\itemsep}{2mm}
+\item Colouring\ \ \pIVto\ \ distribution $P(t,x)$ of (type, colour pattern)
+\item Any maps $a,b\colon[k]\to\Z_3$ \hl{decode} it into an assignment
+\item \bad{\textbf{NO case:}} it satisfies $\le\frac13+\eps$\\
+  $\Rightarrow$\ every \hl{test} $(a,b)$ sees $t$ as nearly uniform and independent of $x$
+\item \hl{Spanning lemma}: these tests detect every dependence that can affect the cut\\[0.3mm]
+  {\small\color{soft}short Fourier argument}\hfill\paperref{Lemma 4.2}
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{2mm}
+{\color{acc!35}\rule{\linewidth}{0.5pt}}\par
+\vspace{1.2mm}
+{\small
+\hl{Needs role separation:}\ \ $U$ and $W$ are decoded by independent maps $a$ and $b$\par
+\vspace{1mm}
+\hl{Tight:}\ \ no black-box use of H\aa stad's theorem can improve the numerator of $\rho$\hfill\paperref{Proposition 4.3}\par}
+\end{frame}
+
+% ---- Frame 17: A uniform family for k = 3 + L colours
+\begin{frame}{A uniform family for $k=3+L$ colours}
+\vspace{-0.8mm}
+% lead line (Section 1.2, "A soundness criterion"; Remark "How the family was found")
+Criterion\ $\Rightarrow$\ gadget design is \hl{one linear program}%
+\hfill{\small\color{soft}solved for $k=4,5$, simplified by hand}
+\par\vspace{3.2mm}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.53\textwidth}
+\input{figs/p4-gadgets-AN}
+\end{column}
+\begin{column}{0.45\textwidth}
+\raggedright
+Add $L$ \hl{universal vertices} $z_1,\dots,z_L$\\
+(squares):\ \ globals for the extra colours\par
+\vspace{4mm}
+The family $(2A_L,\,N_L,\,N_L)$ gives\par
+\vspace{1.8mm}
+\pIVbox{$\begin{aligned}
+\rho\;&=\;1-2/\Gamma_L\\[0.4mm]
+\Gamma_L\;&=\;29+18L+3\tbinom L2
+\end{aligned}$}\hfill
+{\color{soft}\footnotesize\begin{tabular}{@{}r@{}}(Lemma 5.1,\\[-0.4mm]by hand)\end{tabular}}\par
+\vspace{4mm}
+{\renewcommand{\arraystretch}{1.15}%
+\begin{tabular}{@{}l@{\hspace{4mm}}c@{\hspace{4mm}}c@{\hspace{4mm}}c@{\hspace{4mm}}c@{\hspace{4mm}}c@{}}
+\toprule
+$k$ & $3$ & \hl{$4$} & \hl{$5$} & $6$ & $7$\\
+\midrule
+factor\rule[-3.6mm]{0pt}{9.4mm} & $\dfrac{27}{29}$ & \hl{$\dfrac{45}{47}$} & \hl{$\dfrac{33}{34}$} & $\dfrac{45}{46}$
+  & $\dfrac{117}{119}$\\
+\bottomrule
+\end{tabular}}\par
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---- Frame 18: Universal vertices and perfect completeness
+\begin{frame}{Universal vertices and perfect completeness}
+\vspace{-1mm}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.42\textwidth}
+\centering
+A classical reduction\ \ \src{KKLP97, GS13}\par
+\vspace{2.2mm}
+\input{figs/p4-universal}\par
+\vspace{2.6mm}
+The new vertices $z_i$ are\\
+\hl{forced to take the extra colours}\par
+\vspace{0.8mm}
+\paperref{Lemma 6.1}
+\end{column}
+\begin{column}{0.55\textwidth}
+\raggedright
+\begin{itemize}\setlength{\itemsep}{1.1mm}
+\item \hl{Preserves perfect completeness}
+\item Stated constants: applied on top of a weaker intermediate bound
+\item Applied directly to $\frac{16}{17}$ \src{AOTW14}:
+\end{itemize}
+\vspace{0.7mm}
+\hspace*{6mm}\pIVbox{$1-\dfrac{3}{51+34L+3\binom L2}$}\hfill
+\begin{tabular}{@{}r@{}}{\small\color{soft}$k=3+L$}\\[0.6mm]\paperref{Theorem 1.3}\end{tabular}\par
+\vspace{1.5mm}
+\hspace*{6mm}{\renewcommand{\arraystretch}{1.1}%
+\begin{tabular}{@{}l@{\hspace{4mm}}c@{\hspace{4mm}}l@{}}
+\toprule
+$4$-colourable & \hl{$82/85$} & {\footnotesize\color{soft}stated before: $85/86$}\\
+$5$-colourable & \hl{$119/122$} & {\footnotesize\color{soft}stated before: $120/121$}\\
+\bottomrule
+\end{tabular}}\par
+\vspace{1.4mm}
+\hspace*{6mm}{\small\color{soft}Improves the stated bounds for $4\le k\le20$}\par
+\vspace{0.4mm}
+\hspace*{6mm}{\small\color{soft}Applied to Theorem 1.1: only $47/49$ for $k=4$}\par
+\end{column}
+\end{columns}
+\end{frame}

@@ -1,0 +1,45 @@
+% Frame 2: a small graph with a 3-colouring in which exactly two edges are not cut.
+% 8 vertices, 14 unit edges: two K4's that share the vertex c, plus a vertex f joined to a and e.
+% Colours: c0 = white, c1 = grey, c2 = accent.  The edges a-b and d-y are monochromatic; every
+% 3-colouring of this graph leaves at least two edges uncut (two edge-disjoint K4's), so the
+% colouring shown is optimal (checked by brute force: max 3-cut = 12 of 14).
+\begingroup
+\begin{tikzpicture}[x=0.97cm,y=0.97cm,
+  v/.style={circle,draw=black,line width=0.7pt,minimum size=5.8mm,inner sep=0pt},
+  c0/.style={v,fill=white},
+  c1/.style={v,fill=black!35},
+  c2/.style={v,fill=acc},
+  cutedge/.style={line width=0.7pt,black},
+  uncut/.style={line width=2.2pt,warn,dash pattern=on 3.4pt off 2pt}]
+  % vertices
+  \node[c0] (a) at (0.20,3.70) {};
+  \node[c0] (b) at (0.55,0.50) {};
+  \node[c1] (x) at (1.45,2.20) {};
+  \node[c2] (c) at (3.10,1.90) {};
+  \node[c1] (d) at (5.50,0.30) {};
+  \node[c0] (e) at (6.10,3.30) {};
+  \node[c1] (y) at (4.90,1.90) {};
+  \node[c2] (f) at (3.20,4.30) {};
+  % cut edges
+  \draw[cutedge] (a)--(x);
+  \draw[cutedge] (b)--(x);
+  \draw[cutedge] (a)--(c);
+  \draw[cutedge] (b)--(c);
+  \draw[cutedge] (x)--(c);
+  \draw[cutedge] (c)--(d);
+  \draw[cutedge] (c)--(e);
+  \draw[cutedge] (d)--(e);
+  \draw[cutedge] (c)--(y);
+  \draw[cutedge] (e)--(y);
+  \draw[cutedge] (a)--(f);
+  \draw[cutedge] (f)--(e);
+  % edges that are not cut (both endpoints have the same colour)
+  \draw[uncut] (a)--(b);
+  \draw[uncut] (d)--(y);
+  % legend
+  \draw[cutedge] (0.75,-0.75)--(1.75,-0.75);
+  \node[anchor=west,font=\small] at (1.85,-0.75) {cut};
+  \draw[uncut] (3.25,-0.75)--(4.25,-0.75);
+  \node[anchor=west,font=\small,text=warn] at (4.35,-0.75) {not cut};
+\end{tikzpicture}%
+\endgroup

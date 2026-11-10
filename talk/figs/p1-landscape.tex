@@ -1,0 +1,63 @@
+% Frame 3: approximation ratios for Max-3-Cut on a linear axis (broken between 0.68 and 0.82).
+% Positions (unit 1mm): left piece  x = (a-0.65)*600 for 0.65 <= a <= 0.68,
+%                       right piece x = 23 + (a-0.82)*600 for 0.82 <= a <= 1   (same scale: 6mm per 0.01).
+% Values: 2/3 = 0.666667, 0.836 (SDP rounding), 27/29 = 0.931034, 16/17 = 0.941176, 55/57 = 0.964912.
+% Overlay: everything inside \onslide<2->{...} appears on the second step (the bound of this paper).
+\begingroup
+\pgfmathsetmacro{\pIxr}{(0.666667-0.65)*600}%      2/3
+\pgfmathsetmacro{\pIxs}{23+(0.836-0.82)*600}%      0.836
+\pgfmathsetmacro{\pIxn}{23+(0.931034-0.82)*600}%   27/29
+\pgfmathsetmacro{\pIxo}{23+(0.941176-0.82)*600}%   16/17
+\pgfmathsetmacro{\pIxg}{23+(0.964912-0.82)*600}%   55/57
+\pgfmathsetmacro{\pIxe}{23+(1-0.82)*600}%          1
+\begin{tikzpicture}[x=1mm,y=1mm,
+  declare function={axa(\a)=(\a-0.65)*600; axb(\a)=23+(\a-0.82)*600;},
+  lab/.style={font=\small,inner sep=1pt,align=left},
+  reg/.style={font=\normalsize,inner sep=0pt,align=center}]
+  \useasboundingbox (-3,-29) rectangle (139,31.5);
+  % ---- the three regions (bars, 0 <= y <= 14) ----
+  \fill[black!7]  (0,0) rectangle (\pIxs,14);
+  \fill[black!25] (\pIxo,0) rectangle (\pIxe,14);
+  \onslide<2->{\fill[acc] (\pIxn,0) rectangle (\pIxo,14);}
+  \draw[black!60,line width=0.5pt] (0,14)--(\pIxe,14);
+  \draw[black!60,line width=0.5pt] (0,0)--(0,14) (\pIxe,0)--(\pIxe,14);
+  \draw[black!60,line width=0.5pt] (\pIxs,0)--(\pIxs,14);
+  \node[reg] at ({\pIxs/2},7) {polynomial\\[-1pt]time};
+  \node[reg] at ({(\pIxs+\pIxn)/2},7)
+     {\textbf{open}\\[-0.5pt]{\small\color{soft}(assuming only $\mathrm{P}\neq\mathrm{NP}$)}};
+  \node[reg] at ({(\pIxo+\pIxe)/2},7) {\textbf{NP-hard}};
+  % ---- axis with a break (no tick marks at 0.68 and 0.82: they would touch the break marks) ----
+  \draw[line width=0.9pt] (0,0)--(19.3,0) (21.7,0)--(\pIxe,0);
+  \draw[line width=0.7pt] (18.5,-1.6)--(20.1,1.6) (20.9,-1.6)--(22.5,1.6);
+  \foreach \a in {0.65,0.66,0.67} \draw[black!70,line width=0.4pt] ({axa(\a)},0)--({axa(\a)},-1.1);
+  \foreach \a in {0.83,0.84,...,1.001} \draw[black!70,line width=0.4pt] ({axb(\a)},0)--({axb(\a)},-1.1);
+  \foreach \a/\t in {0.9/0.9,1/1}
+    {\draw[black!70,line width=0.5pt] ({axb(\a)},0)--({axb(\a)},-2);
+     \node[font=\small,text=soft,anchor=north,inner sep=1pt] at ({axb(\a)},-2.8) {$\t$};}
+  % ---- algorithms (below the axis) ----
+  \draw[line width=0.9pt] (\pIxr,0)--(\pIxr,-2.4);
+  \node[lab,anchor=north,align=center] at (\pIxr,-2.8) {$\mathbf{2/3}$};
+  \node[lab,anchor=north,align=center] at (\pIxr,-9.4) {random\\[-1pt]colouring};
+  \draw[line width=0.9pt] (\pIxs,0)--(\pIxs,-2.4);
+  \node[lab,anchor=north] at (\pIxs,-2.8) {$\mathbf{0.836}$};
+  \node[lab,anchor=north west] at ({\pIxs-5.2},-9.4)
+     {best algorithm: SDP rounding \src{FJ97, GW04, dKPW04}\\[0.5pt]
+      optimal under the Unique Games Conjecture};
+  % ---- [NRT25] for k = 3 (grey) ----
+  \fill[black!55] (\pIxg,0) circle[radius=0.9];
+  \draw[black!55,line width=0.6pt] (\pIxg,0)--(\pIxg,-13.6);
+  \node[lab,anchor=north west,text=soft] at ({\pIxg-0.2},-14.2)
+     {$55/57\approx 0.965$\\[0.5pt]gadgets of [NRT25]\\[-1pt](AlphaEvolve)};
+  % ---- hardness (above the bars) ----
+  \draw[line width=0.9pt] (\pIxo,0)--(\pIxo,20.5);
+  \node[lab,anchor=south west] at ({\pIxo+1.2},15.6)
+     {$\mathbf{16/17\approx 0.941}$\\[0.5pt]NP-hard \src{AOTW14}, 2012};
+  % ---- step 2: this paper ----
+  \onslide<2->{
+    \draw[acc,line width=1.1pt] (\pIxn,0)--(\pIxn,20.5);
+    \node[lab,anchor=south east,align=right,text=acc] at ({\pIxn-1.2},15.6)
+       {$\mathbf{27/29\approx 0.931}$\\[0.5pt]\textbf{NP-hard: this paper}};
+    \draw[acc,line width=1.1pt,-{Stealth[length=2mm,width=2mm]}] ({\pIxo-0.5},17.6)--({\pIxn+0.6},17.6);
+  }
+\end{tikzpicture}%
+\endgroup

@@ -1,0 +1,144 @@
+% =====================================================================
+% PART 1 (frames 1-6): title, the problem, what was known, main results,
+% all k at a glance, roadmap.
+% Figures: figs/p1-cutexample.tex, figs/p1-landscape.tex, figs/p1-bounds.tex
+% =====================================================================
+
+% local helpers of part 1 (names are prefixed with pI to avoid clashes with other parts)
+\providecommand{\pInum}[1]{\tikz[baseline=(n.base)]\node[circle,fill=acc,text=white,font=\bfseries\large,
+  inner sep=0pt,minimum size=8.5mm] (n) {#1};}
+\providecommand{\pIto}{\ensuremath{\;\longrightarrow\;}}
+
+% ---- Frame 1: title frame
+\begin{frame}[plain]
+\vspace*{12mm}
+{\color{acc}\bfseries\LARGE Improved NP-Hardness of Approximation\\[1.5mm]
+ for Max-3-Cut and for Max-$k$-Cut with Small $k$\par}
+\vspace{3mm}
+{\color{acc!35}\rule{\linewidth}{0.8pt}}\par
+\vspace{7mm}
+{\Large Ziang Ni\par}
+\vspace{2mm}
+{\large Delft University of Technology\par}
+\vspace{11mm}
+{\color{soft}\small STOC 2027 submission video\par}
+\end{frame}
+
+% ---- Frame 2: The problem: Max-k-Cut
+\begin{frame}{The problem: Max-$k$-Cut}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.53\textwidth}
+\raggedright
+\vspace{6mm}
+\textbf{Input:} graph with non-negative edge weights\par
+\vspace{4mm}
+\textbf{Colour} every vertex with one of $k$ colours\par
+\vspace{4mm}
+\textbf{Maximise} the total weight of \hl{cut} edges:\\
+edges whose endpoints get different colours\par
+\vspace{6.5mm}
+{\color{acc!35}\rule{0.94\linewidth}{0.5pt}}\par
+\vspace{3mm}
+\begin{itemize}\setlength{\itemsep}{2.5mm}
+\item $k=2$:\ \ Max-Cut
+\item random colouring: each edge is cut with\\ probability $1-\frac1k$\quad ($\frac23$ for $k=3$)
+\end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+\centering
+\vspace{2mm}
+\input{figs/p1-cutexample}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---- Frame 3: Max-3-Cut: what was known
+\begin{frame}{Max-3-Cut: what was known}
+\vspace{2mm}
+Which approximation ratios can be achieved in polynomial time?
+\vfill
+\centering
+\input{figs/p1-landscape}
+\vfill
+\end{frame}
+
+% ---- Frame 4: Main results
+\begin{frame}{Main results}
+\vspace{-0.5mm}
+\begin{block}{Theorem 1.1\ \ (Max-3-Cut)}
+\begin{minipage}[c]{0.545\linewidth}
+For every $\eps>0$ it is NP-hard to distinguish\\[0.4mm]
+\hspace*{3mm}\textbf{some} $3$-colouring cuts $\ge\frac{29}{30}-\eps$\\[0.4mm]
+\hspace*{3mm}\textbf{every} $3$-colouring cuts $\le\frac{9}{10}+\eps$\\[0.2mm]
+{\footnotesize\color{soft}\hspace*{3mm}(as fractions of the total edge weight)}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.44\linewidth}
+\centering
+$\Longrightarrow$\ \ NP-hard to approximate within\\[1.6mm]
+{\Large\hl{$\mathbf{27/29}+\eps\approx0.931$}}\\[1.6mm]
+{\small\color{soft}previous: $16/17\approx0.941$} \src{AOTW14}
+\end{minipage}
+\end{block}
+\vspace{-0.5mm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.475\textwidth}
+\begin{block}{Theorem 1.2\ \ (every $k\ge3$)}
+NP-hard to approximate within\\[0.4mm]
+$1-2/\Gamma_{k-3}+\eps$,\ \ \ $\Gamma_L=29+18L+3\tbinom L2$\\[1.5mm]
+\begin{tabular}{@{}l@{\hspace{6mm}}l@{}}
+$k=4$ & $k=5$\\[-0.3mm]
+\hl{$45/47\approx0.957$} & \hl{$33/34\approx0.971$}\\[-0.6mm]
+{\footnotesize\color{soft}was $0.987$} \src{NRT25} & {\footnotesize\color{soft}was $120/121$} \src{AOTW14}
+\end{tabular}
+\end{block}
+\end{column}
+\begin{column}{0.482\textwidth}
+\begin{block}{Theorem 1.3\ \ ($k$-colourable graphs)}
+NP-hard to distinguish: $k$-colourable, or\\[0.4mm]
+every $k$-colouring cuts at most\vphantom{$\tbinom L2$}\\[1.5mm]
+\begin{tabular}{@{}l@{\hspace{3mm}}l@{}}
+$k=4$ & $k=5$\\[-0.3mm]
+\hl{$82/85+\eps\approx0.965$} & \hl{$119/122+\eps\approx0.975$}\\[-0.6mm]
+{\footnotesize\color{soft}stated before: $85/86$} & {\footnotesize\color{soft}stated before: $120/121$}
+\end{tabular}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---- Frame 5: All k at a glance, and one limitation
+\begin{frame}{All $k$ at a glance, and one limitation}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.62\textwidth}
+\input{figs/p1-bounds}
+\end{column}
+\begin{column}{0.345\textwidth}
+\begin{itemize}\setlength{\itemsep}{3.5mm}
+\item \hl{improved} for every $k$ from $3$ to $20$
+\item $k\ge21$: previous bound\\ \src{AOTW14} remains best
+\end{itemize}
+\vspace{6mm}
+\begin{alertblock}{Limitation}
+No perfect completeness:\\ on $3$-colourable graphs,\\ $16/17$ \src{AOTW14} is still\\ the best bound.
+\end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---- Frame 6: Three ideas
+\begin{frame}{Three ideas}
+\vspace{2mm}
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}m{12mm}@{\hspace{3mm}}m{125mm}@{}}
+\pInum{1} & {\Large\textbf{The negation trick}\pIto\hl{$\mathbf{27/29}$ for Max-3-Cut}}\\[1mm]
+          & {\color{soft}pair every assignment $X$ with $-X$; proof in a few lines}
+            \hfill\paperref{Section 3}\\[10mm]
+\pInum{2} & {\Large\textbf{A soundness criterion} for gadget reductions\pIto\hl{all $k$}}\\[1mm]
+          & {\color{soft}from H\aa stad's equations; used for more than three colours}
+            \hfill\paperref{Sections 4--5}\\[10mm]
+\pInum{3} & {\Large\textbf{A barrier}\pIto\hl{$\mathbf{27/29}$ is optimal for this method}}\\[1mm]
+          & {\color{soft}under the criterion, gadgets of any size cannot do better}
+            \hfill\paperref{Section 7}\\[2.5mm]
+\multicolumn{2}{@{}l@{}}{\small\color{soft}At the end: how these results were obtained --- with extensive use of an AI system}
+\end{tabular}
+\end{frame}

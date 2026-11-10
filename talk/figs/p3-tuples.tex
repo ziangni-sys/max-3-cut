@@ -1,0 +1,53 @@
+% Frame 10: the 27 tuples of Z_3^3 (x written as x_1x_2x_3) in the classes A, D, T_1, T_2.
+% Adapted from ../paper/figures/tuples.tex (Figure 3 of the paper): same boxes, same tuples at the same
+% positions, same class names/descriptions, same sat_t braces, same three negation arrows, same highlighted
+% pair 121 <-> 212.  Changes for the slide: larger fonts and geometry; the two bottom rows (V_E, V_N) are
+% left out (their content is on frame 12); the label "x -> -x" is replaced by the example "121 -> 212"
+% from the paper's caption (the slide has the line "Negation x -> -x ..." directly under the figure).
+% Box geometry in x-units as in the paper: A=[0,1], D=[1.75,3.75], T_1=[4.5,7.5], T_2=[8.25,11.25].
+\begin{tikzpicture}[x=1.2cm,y=1cm,
+  cls/.style={draw,rounded corners=2.5pt,line width=0.7pt,fill=black!3},
+  tup/.style={font=\large,inner sep=0pt},
+  hlt/.style={tup,text=acc},
+  cname/.style={font=\Large,inner sep=1pt,text height=1.7ex,text depth=0.5ex},
+  cdesc/.style={font=\small,text=black!75,inner sep=1pt,text height=1.6ex,text depth=0.5ex},
+  neg/.style={<->,>={Stealth[length=5.5pt,width=4.6pt]},acc,line width=0.9pt},
+  brc/.style={decorate,decoration={brace,amplitude=5pt},line width=0.6pt},
+  slab/.style={above=5pt,font=\normalsize,inner sep=1pt,text height=1.7ex,text depth=0.5ex},
+  eg/.style={font=\small,text=acc,inner sep=1pt}]
+\def\rh{0.66}\def\bt{2.18}% row height; top of the boxes (3*0.66 + 2*0.1)
+% ---------------------------------------------------------------- boxes
+\foreach \l/\r in {0/1, 1.75/3.75, 4.5/7.5, 8.25/11.25}
+  \draw[cls] (\l,0) rectangle (\r,\bt);
+% ---------------------------------------------------------------- tuples
+\foreach \i/\a/\d/\e/\p/\q/\r/\pp/\qq/\rr in {
+    0/000/012/021/001/010/100/002/020/200,
+    1/111/102/201/112/{}/211/221/{}/122,
+    2/222/120/210/022/202/220/011/101/110}{
+  \pgfmathsetmacro{\yy}{\bt-0.1-\i*\rh-0.5*\rh}
+  \node[tup] at (0.5,\yy)   {$\a$};
+  \node[tup] at (2.25,\yy)  {$\d$};
+  \node[tup] at (3.25,\yy)  {$\e$};
+  \node[tup] at (5,\yy)     {$\p$};
+  \node[tup] at (6,\yy)     {$\q$};
+  \node[tup] at (7,\yy)     {$\r$};
+  \node[tup] at (8.75,\yy)  {$\pp$};
+  \node[tup] at (9.75,\yy)  {$\qq$};
+  \node[tup] at (10.75,\yy) {$\rr$};}
+% the T_2 entry at each position is the negation of the T_1 entry there; one pair is highlighted
+\node[hlt] at (6,\bt-0.1-1.5*\rh)    {$\mathbf{121}$};
+\node[hlt] at (9.75,\bt-0.1-1.5*\rh) {$\mathbf{212}$};
+% ---------------------------------------------------------------- headers
+\foreach \c/\n/\d in {0.5/{\mathcal A}/all equal, 2.75/{\mathcal D}/all distinct,
+                      6/{\mathcal T_1}/{two equal, $s=1$}, 9.75/{\mathcal T_2}/{two equal, $s=2$}}{
+  \node[cname] at (\c,\bt+0.86) {$\n$};
+  \node[cdesc] at (\c,\bt+0.32) {\d};}
+\draw[brc] (0,\bt+1.26)    -- node[slab] {$\sat_0$\ \ ($s(x)=0$)} (3.75,\bt+1.26);
+\draw[brc] (4.5,\bt+1.26)  -- node[slab] {$\sat_1$} (7.5,\bt+1.26);
+\draw[brc] (8.25,\bt+1.26) -- node[slab] {$\sat_2$} (11.25,\bt+1.26);
+% ---------------------------------------------------------------- negation
+\draw[neg] (0.3,-0.09)  to[out=-60,in=-120,looseness=1.6] (0.7,-0.09);
+\draw[neg] (2.45,-0.09) to[out=-50,in=-130,looseness=1.3] (3.05,-0.09);
+\draw[neg] (6,-0.09)    to[out=-14,in=-166] (9.75,-0.09);
+\node[eg] at (7.875,-0.66) {e.g.\ $121\mapsto212$};
+\end{tikzpicture}

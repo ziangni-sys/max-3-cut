@@ -1,0 +1,49 @@
+% Frame 16: decoding a colouring into an assignment (schematic; cf. the paper's Figure 2 with its labels
+% "decoded by a" / "decoded by b", and the proof idea of Theorem 4.1).
+% Top row: the variable vertices of U (two) and of W (four) with their colours, drawn as fills
+% (k = 4 colours: white, grey, accent blue, dark grey).  Every U-vertex is sent through the map a, every
+% W-vertex through the map b (two arbitrary maps [k] -> Z_3, shown as tables); the bottom row is the
+% decoded assignment  u -> a(colour of u),  w -> b(colour of w).
+% The two maps are different: e.g. blue is decoded to 2 on U but to 1 on W.
+\begingroup
+\newcommand{\pIVent}[4]{% #1,#2 = position of the swatch, #3 = colour style, #4 = value
+  \node[sw,#3] at (#1,#2) {};
+  \node[font=\scriptsize,inner sep=0pt] at ($(#1,#2)+(0.32,0)$) {$\mapsto$};
+  \node[font=\small,inner sep=0pt] at ($(#1,#2)+(0.60,0)$) {$#4$};}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  v/.style={circle,draw,line width=0.6pt,inner sep=0pt,minimum size=12pt},
+  sw/.style={circle,draw,line width=0.45pt,inner sep=0pt,minimum size=7.5pt},
+  c0/.style={fill=white}, c1/.style={fill=black!35}, c2/.style={fill=acc}, c3/.style={fill=black!78},
+  grp/.style={font=\normalsize,text=black!70,inner sep=0pt,anchor=base},
+  valn/.style={font=\large,inner sep=0pt,anchor=base},
+  mapbox/.style={draw=acc!55,fill=acc!5,rounded corners=3pt,line width=0.6pt},
+  mapname/.style={font=\Large,text=acc,inner sep=0pt},
+  ar/.style={-{Stealth[length=4pt,width=3.6pt]},line width=0.6pt,black!60}]
+% ---------------------------------------------------------------- the two maps (boxes)
+\draw[mapbox] (0.00,1.62) rectangle (2.66,2.86);
+\draw[mapbox] (2.98,1.62) rectangle (6.30,2.86);
+\node[mapname] at (0.36,2.24) {$a$};
+\pIVent{0.88}{2.50}{c0}{1}
+\pIVent{1.88}{2.50}{c1}{0}
+\pIVent{0.88}{1.98}{c2}{2}
+\pIVent{1.88}{1.98}{c3}{1}
+\node[mapname] at (3.52,2.24) {$b$};
+\pIVent{4.26}{2.50}{c0}{0}
+\pIVent{5.26}{2.50}{c1}{1}
+\pIVent{4.26}{1.98}{c2}{1}
+\pIVent{5.26}{1.98}{c3}{2}
+% ---------------------------------------------------------------- vertices (colours), arrows, decoded values
+\foreach \x/\c/\val in {0.90/c2/2, 1.76/c1/0, 3.35/c0/0, 4.21/c2/1, 5.07/c1/1, 5.93/c3/2}{
+  \node[v,\c] (n) at (\x,3.50) {};
+  \draw[ar] (\x,3.24) -- (\x,2.89);
+  \draw[ar] (\x,1.62) -- (\x,1.22);
+  \node[valn] at (\x,0.86) {$\val$};}
+% ---------------------------------------------------------------- group labels
+\node[grp] at (1.33,4.02) {$U$};
+\node[grp] at (4.64,4.02) {$W$};
+\node[font=\small,inner sep=0pt,anchor=base] at (3.405,4.62) {a \hl{colouring} of the variables\ \ {\color{soft}($k=4$)}};
+% ---------------------------------------------------------------- the result
+\draw[decorate,decoration={brace,mirror,amplitude=4pt},black!55,line width=0.5pt] (0.60,0.66) -- (6.21,0.66);
+\node[font=\small,inner sep=0pt,anchor=base] at (3.405,0.10) {an \hl{assignment} of the equations};
+\end{tikzpicture}%
+\endgroup

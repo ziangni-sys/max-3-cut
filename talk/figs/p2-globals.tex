@@ -1,0 +1,15 @@
+% Frame 9, zone (iii): the global reference vertices g_0,g_1,g_2 (squares).
+% Top row: an honest colouring gives them three different colours (they play the roles of 0,1,2).
+% Bottom row (warn): a cheating colouring gives all three the same colour.
+% Colours as fills: white, grey (black!35), accent blue.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  g/.style={rectangle,draw,line width=0.6pt,inner sep=0pt,minimum size=10pt},
+  ca/.style={fill=white}, cb/.style={fill=black!35}, cc/.style={fill=acc},
+  rl/.style={font=\small,anchor=east,inner sep=0pt},
+  gl/.style={font=\small,inner sep=0pt,anchor=base}]
+\foreach \i/\x in {0/0,1/0.78,2/1.56}{\node[gl] at (\x,0.98) {$g_{\i}$};}
+\node[rl] at (-0.42,0.58) {honest};
+\foreach \x/\c in {0/ca,0.78/cb,1.56/cc}{\node[g,\c] at (\x,0.58) {};}
+\node[rl,text=warn] at (-0.42,0) {cheating};
+\foreach \x in {0,0.78,1.56}{\node[g,cb,draw=warn,line width=1.1pt] at (\x,0) {};}
+\end{tikzpicture}

@@ -1,0 +1,11 @@
+% Frame 9, zone (ii): the two kinds of colour patterns with x_1+x_2+x_3 = 0 over Z_3:
+% all three values equal, or all three distinct.  Colours as fills: white, grey (black!35), accent blue.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  v/.style={circle,draw,line width=0.6pt,inner sep=0pt,minimum size=10pt},
+  ca/.style={fill=white}, cb/.style={fill=black!35}, cc/.style={fill=acc},
+  lab/.style={font=\small,anchor=west,inner sep=0pt}]
+\foreach \i/\c in {0/cb,1/cb,2/cb}{\node[v,\c] at (0.46*\i,0.62) {};}
+\node[lab] at (1.38,0.62) {all equal, or};
+\foreach \i/\c in {0/ca,1/cb,2/cc}{\node[v,\c] at (0.46*\i,0) {};}
+\node[lab] at (1.38,0) {all distinct};
+\end{tikzpicture}

@@ -1,0 +1,107 @@
+% =====================================================================================================
+% PART 2 (frames 7-9): background -- Hastad's theorem, gadget reductions, the colour-reference problem.
+% Sources in the paper: Section 1.2 (first paragraph), Section 2 (Theorem 2.1, gadgets, the reduction,
+% Figure 2).
+% =====================================================================================================
+
+% ---- Frame 7: Starting point: Håstad's theorem
+\begin{frame}{Starting point: H\aa stad's theorem}
+\vspace{2mm}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.55\textwidth}
+Linear equations over $\Z_3$ with three variables:\\[2.6mm]
+\hspace*{12mm}{\Large$x_1+x_2+x_3=t$}\\[2.6mm]
+$t\in\{0,1,2\}$ is the \hl{type} of the equation
+\end{column}
+\begin{column}{0.42\textwidth}
+\raggedleft
+\begin{tikzpicture}
+\node[draw=black!30,fill=black!3,rounded corners=3pt,inner xsep=7pt,inner ysep=4.5pt] (ex) {%
+  \renewcommand{\arraystretch}{1.12}%
+  $\begin{array}{@{}r@{\;}c@{\;}l@{\qquad}l@{}}
+   {\color{acc}u_1}+w_1+w_2 &=& 0 & \text{\color{soft}\small type $0$}\\
+   {\color{acc}u_1}+w_2+w_3 &=& 1 & \text{\color{soft}\small type $1$}\\
+   {\color{acc}u_2}+w_3+w_4 &=& 2 & \text{\color{soft}\small type $2$}
+  \end{array}$};
+\node[anchor=south west,font=\footnotesize,text=soft,inner sep=1.5pt] at (ex.north west) {example};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\vspace{3mm}
+\begin{block}{Theorem 2.1 \src{H\aa s01}}
+For every $\eps>0$ it is NP-hard to distinguish\\[1mm]
+\begin{tabular}{@{\hspace{3mm}}l@{\quad}l@{}}
+\hl{YES} & some assignment satisfies $\ge 1-\eps$ of the equations\\[0.6mm]
+\bad{\textbf{NO}} & every assignment satisfies $\le \tfrac13+\eps$ of the equations
+\end{tabular}%
+\hfill\raisebox{-2.55mm}{\color{soft}\small random assignment: $\tfrac13$}
+\end{block}
+\vspace{3mm}
+{\small
+\begin{tabular}{@{}l@{\quad}l@{}}
+We use two features & {\tiny\color{acc}\raisebox{0.25ex}{$\blacksquare$}}\ \ \hl{role separation}: one variable from
+  ${\color{acc}U}$, two from $W$ \ ($U$, $W$ disjoint)\\[0.3mm]
+of these instances: &{\tiny\color{acc}\raisebox{0.25ex}{$\blacksquare$}}\ \ \hl{balance}: each type has total weight $\tfrac13$
+\end{tabular}}
+\end{frame}
+
+% ---- Frame 8: Gadget reductions
+\begin{frame}{Gadget reductions}
+\vspace{0.5mm}
+\begin{columns}[c,onlytextwidth]
+\begin{column}{0.64\textwidth}
+\input{figs/p2-reduction}
+\end{column}
+\begin{column}{0.34\textwidth}
+\begin{itemize}\setlength{\itemsep}{3.2mm}
+\item Variable $\to$ \hl{one vertex};\\ its colour = its value
+\item Equation $\to$ a \hl{gadget}:\\ a small graph with new\\ auxiliary vertices
+\item Equation satisfied $\Rightarrow$\\ the gadget can cut more
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{1mm}
+\begin{block}{}
+\hspace*{\fill}%
+\begin{tabular}{@{}r@{\;\;$\longrightarrow$\;\;}l@{}}
+almost satisfiable system & \hl{large cut}\\[0.5mm]
+far from satisfiable & \bad{\textbf{every colouring cuts less}}
+\end{tabular}%
+\hspace*{\fill}\llap{\raisebox{-2.3mm}{\src{TSSW00}}}
+\end{block}
+\end{frame}
+
+% ---- Frame 9: The obstacle: colours have no names
+\begin{frame}{The obstacle: colours have no names}
+\vspace{3mm}
+\begin{columns}[T,onlytextwidth]
+% ---------------- zone (i): renaming the colours
+\begin{column}{0.315\textwidth}
+\textbf{Rename the colours:}\par\vspace{3.4mm}
+\centerline{\input{figs/p2-rename}}\par\vspace{2.6mm}
+\centerline{exactly the \hl{same cut}}
+\end{column}
+\begin{column}{0.4pt}\color{acc!25}\rule{0.4pt}{37mm}\end{column}
+% ---------------- zone (ii): type 0
+\begin{column}{0.285\textwidth}
+\textbf{Type 0 is fine:}\par\vspace{2.4mm}
+$x_1+x_2+x_3=0$\quad$\Longleftrightarrow$\par\vspace{3mm}
+\hspace*{2mm}\input{figs/p2-type0}\par\vspace{2.6mm}
+{\small unchanged when the colours are renamed}
+\end{column}
+\begin{column}{0.4pt}\color{acc!25}\rule{0.4pt}{37mm}\end{column}
+% ---------------- zone (iii): types 1 and 2
+\begin{column}{0.335\textwidth}
+\textbf{Types 1 and 2 are not:}\par\vspace{2.4mm}
+which colour is ``$1$''?\par\vspace{1.8mm}
+$\Rightarrow$ global \hl{reference vertices}\par\vspace{3mm}
+\hspace*{4mm}\input{figs/p2-globals}
+\end{column}
+\end{columns}
+\vspace{4.5mm}
+\begin{alertblock}{The colour-reference problem}
+Guarding against cheating makes the gadgets for $t\neq0$ \bad{\textbf{large and inefficient}}:
+for $k=3$, the gadgets of \src{NRT25} give only $55/57\approx0.965$, weaker than
+$16/17\approx0.941$.
+\end{alertblock}
+\end{frame}

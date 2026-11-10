@@ -1,0 +1,32 @@
+% Frame 9, zone (i): the same 3-coloured graph twice (a triangle with a pendant edge); in the right copy
+% the grey and the blue colour are exchanged everywhere.  The same three edges are cut and the same edge
+% (dashed, warn) is not cut.  Colours as fills: white, grey (black!35), accent blue.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  v/.style={circle,draw,line width=0.6pt,inner sep=0pt,minimum size=11pt},
+  ca/.style={fill=white}, cb/.style={fill=black!35}, cc/.style={fill=acc},
+  e/.style={line width=0.8pt},
+  unc/.style={warn,line width=1.8pt,dash pattern=on 3pt off 1.6pt},
+  tip/.tip={Stealth[length=4pt,width=3.6pt]}]
+% ---- left copy: triangle (white, grey, blue) and a pendant vertex with the colour of its neighbour
+\node[v,ca] (a) at (0.20,1.30) {};
+\node[v,cb] (b) at (0,0) {};
+\node[v,cc] (c) at (1.10,0) {};
+\node[v,cc] (d) at (1.10,1.30) {};
+\draw[e] (a) -- (b) -- (c) -- (a);
+\draw[unc] (c) -- (d);
+% ---- right copy: grey and blue exchanged
+\begin{scope}[shift={(2.85,0)}]
+  \node[v,ca] (a2) at (0.20,1.30) {};
+  \node[v,cc] (b2) at (0,0) {};
+  \node[v,cb] (c2) at (1.10,0) {};
+  \node[v,cb] (d2) at (1.10,1.30) {};
+  \draw[e] (a2) -- (b2) -- (c2) -- (a2);
+  \draw[unc] (c2) -- (d2);
+\end{scope}
+% ---- the renaming: exchange grey and blue
+\draw[tip-tip,line width=0.8pt,acc] (1.55,0.42) -- (2.40,0.42);
+\node[v,cb,minimum size=7.5pt,line width=0.45pt] (s1) at (1.66,0.90) {};
+\node[v,cc,minimum size=7.5pt,line width=0.45pt] (s2) at (2.29,0.90) {};
+\draw[{Stealth[length=2.6pt,width=2.4pt]}-{Stealth[length=2.6pt,width=2.4pt]},line width=0.45pt]
+  ([xshift=1.2pt]s1.east) -- ([xshift=-1.2pt]s2.west);
+\end{tikzpicture}

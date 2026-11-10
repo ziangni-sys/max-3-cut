@@ -1,0 +1,83 @@
+% Frame 12: the gadgets E (left) and N (right) = panels (a) and (b) of the paper's Figure 4
+% (../paper/figures/gadgets.tex), with EXACTLY the same edges and weights; only the geometry and the
+% label sizes are enlarged for the slide, the panel captions are replaced by slide text (name, type and
+% source at the top left of each gadget, two caption lines under it), and a two-entry legend is added.
+% Every edge is drawn explicitly, one \draw per edge; the edge list extracted from these lines was compared
+% by a script with panels (a),(b) of the paper's figure and with the definitions in Section 3 of the paper.
+% Edge styles: e1, e1p = weight 1;  e3 = weight 3.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  prim/.style={circle,draw,line width=0.5pt,fill=black!15,inner sep=0pt,minimum size=14.5pt,font=\small},
+  aux/.style={circle,draw,line width=0.5pt,fill=white,inner sep=0pt,minimum size=14pt,font=\footnotesize},
+  e1/.style={line width=0.55pt},
+  e1p/.style={line width=0.55pt,black!60},
+  e3/.style={line width=1.7pt},
+  gname/.style={font=\LARGE,text=acc,inner sep=0pt,anchor=base west},
+  gsub/.style={font=\small,inner sep=0pt,anchor=base west},
+  capA/.style={font=\small,inner sep=0pt,anchor=base,text=black!80},
+  capB/.style={font=\normalsize,inner sep=0pt,anchor=base},
+  leg/.style={font=\footnotesize,inner sep=0pt,anchor=west,text=black!80}]
+% ================================================================== (a) E
+\begin{scope}[shift={(0,0)}]
+  \node[aux] (aA1) at (90:1.9) {$a_1$};
+  \node[aux] (aA4) at (30:1.9) {$a_4$};
+  \node[aux] (aA5) at (-30:1.9) {$a_5$};
+  \node[aux] (aA2) at (-90:1.9) {$a_2$};
+  \node[aux] (aA3) at (-150:1.9) {$a_3$};
+  \node[aux] (aA6) at (150:1.9) {$a_6$};
+  \node[prim] (pA1) at (90:0.855) {$p_1$};
+  \node[prim] (pA2) at (-30:0.855) {$p_2$};
+  \node[prim] (pA3) at (210:0.855) {$p_3$};
+  % the 6-cycle a1 a4 a5 a2 a3 a6
+  \draw[e1] (aA1) -- (aA4);
+  \draw[e1] (aA4) -- (aA5);
+  \draw[e1] (aA5) -- (aA2);
+  \draw[e1] (aA2) -- (aA3);
+  \draw[e1] (aA3) -- (aA6);
+  \draw[e1] (aA6) -- (aA1);
+  % each primary is adjacent to four auxiliary vertices
+  \draw[e1p] (pA1) -- (aA1);
+  \draw[e1p] (pA1) -- (aA2);
+  \draw[e1p] (pA1) -- (aA3);
+  \draw[e1p] (pA1) -- (aA4);
+  \draw[e1p] (pA2) -- (aA3);
+  \draw[e1p] (pA2) -- (aA4);
+  \draw[e1p] (pA2) -- (aA5);
+  \draw[e1p] (pA2) -- (aA6);
+  \draw[e1p] (pA3) -- (aA1);
+  \draw[e1p] (pA3) -- (aA2);
+  \draw[e1p] (pA3) -- (aA5);
+  \draw[e1p] (pA3) -- (aA6);
+  % slide text
+  \node[gname] at (-3.5,1.52) {$E$};
+  \node[gsub]  at (-3.5,0.96) {type $0$};
+  \node[gsub]  at (-3.5,0.48) {\src{NRT25}};
+  \node[capA] at (0,-2.82) {$6$ auxiliary vertices, $18$ unit edges};
+  \node[capB] at (0,-3.44) {max cut $=$ \hl{$18$ if $s=0$}, else $16$};
+\end{scope}
+% ================================================================== (b) N
+\begin{scope}[shift={(7.4,-0.525)}]
+  \node[prim] (pB1) at (90:2.0) {$p_1$};
+  \node[prim] (pB2) at (-30:2.0) {$p_2$};
+  \node[prim] (pB3) at (210:2.0) {$p_3$};
+  \node[aux] (qB) at (0,0) {$q$};
+  \draw[e1] (pB1) -- (pB2);
+  \draw[e1] (pB2) -- (pB3);
+  \draw[e1] (pB3) -- (pB1);
+  \draw[e3] (qB) -- (pB1);
+  \draw[e3] (qB) -- (pB2);
+  \draw[e3] (qB) -- (pB3);
+  % slide text
+  \node[gname] at (-3.4,2.045) {$N$};
+  \node[gsub]  at (-3.4,1.485) {types $1$ and $2$};
+  \node[gsub,text=acc]  at (-3.4,1.005) {this paper};
+  \node[capA] at (0,-2.295) {triangle $+$ vertex $q$;\ \ thick edges: weight $3$};
+  \node[capB] at (0,-2.915) {max cut $=$ \hl{$11$ if $s\neq0$}, else $9$};
+\end{scope}
+% ================================================================== legend (between the gadgets)
+\node[prim,minimum size=9pt] at (2.55,-0.78) {};
+\node[leg] at (2.85,-0.78) {variable vertices};
+\node[aux,minimum size=9pt]  at (2.55,-1.28) {};
+\node[leg] at (2.85,-1.28) {auxiliary vertices};
+% pointer to the paper, between the two "max cut" lines (both values are Lemma 3.1)
+\node[font=\footnotesize,inner sep=0pt,anchor=base] at (3.7,-3.44) {\paperref{Lemma 3.1}};
+\end{tikzpicture}

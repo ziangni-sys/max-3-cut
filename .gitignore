@@ -9,5 +9,11 @@ paper/*.out
 paper/*.blg
 paper/*.toc
 paper/arxiv.tar.gz
-# talk materials (slides and script for the STOC video) are kept out of the public repository for now
-talk/
+# talk: the slides are public; build files and the speaker script stay local
+talk/build/
+talk/tools/
+talk/script.md
+talk/narration.json
+talk/slides-notes.pptx
+talk/slides-handout.pdf
+talk/talk-source.zip
